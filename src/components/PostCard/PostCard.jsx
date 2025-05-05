@@ -1,18 +1,27 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { selectPostsFilter } from "../../redux/filters/selectors"
 import s from "./PostCard.module.css"
 import { Field, Form, Formik } from "formik"
 import * as Yup from "yup";
 import { useState } from "react";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import { addReactionToPost } from "../../redux/posts/operations";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { selectUserID } from "../../redux/posts/selectors";
 const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditing, onDelete }) => {
     const [showConfirm, setShowConfirm] = useState(false);
+    const dispatch = useDispatch()
     const filter = useSelector(selectPostsFilter)
+    const userId = useSelector(selectUserID)
+    const currentReaction = post.userReactions?.[userId]
+    const isLoggedIn = useSelector(selectIsLoggedIn)
     const handleDelete = () => {
         onDelete(post.id)
         setShowConfirm(false)
     }
-    const getHighlightedText = (text, highlight) => {
+
+
+    const getHighlightedText = (text, highlight, style = s.highlight) => {
         if (!highlight) return text;
 
         const regex = new RegExp(`(${highlight})`, 'gi'); // RegExp to build a regex dynamically and find corresponding words 
@@ -20,7 +29,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
         return parts.map((part, index) =>
             part.toLowerCase() === highlight.toLowerCase() ? (
-                <span key={index} className={s.highlight}>{part}</span>
+                <span key={index} className={style}>{part}</span>
             ) : (
                 <span key={index}>{part}</span>
             )
@@ -63,13 +72,41 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 </div>
             )}
 
-            <p>{post.authorName}</p>
+            <p>{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
             <p>{getHighlightedText(post.body, filter)}</p>
             <p >{new Date(post.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
             })}</p>
+            <div>
+                {isLoggedIn ?
+                    <div>
+                        <button disabled={currentReaction === "like"} onClick={() => dispatch(addReactionToPost({ post, reaction: "like", userId }))}>
+                            👍 {post.reactions?.like || 0}
+                        </button>
+                        <button disabled={currentReaction === "love"} onClick={() => dispatch(addReactionToPost({ post, reaction: "love", userId }))}>
+                            ❤️ {post.reactions?.love || 0}
+                        </button>
+                        <button disabled={currentReaction === "laugh"} onClick={() => dispatch(addReactionToPost({ post, reaction: "laugh", userId }))}>
+                            😂 {post.reactions?.laugh || 0}
+                        </button>
+                    </div> :
+                    <div>
+                        <p>
+                            👍 {post.reactions?.like || 0}
+                        </p>
+                        <p>
+                            ❤️ {post.reactions?.love || 0}
+                        </p>
+                        <p>
+                            😂 {post.reactions?.laugh || 0}
+                        </p>
+                    </div>
+                }
+
+            </div>
+
             {isEditable && <div> <button onClick={() => {
                 onStartEdit()
             }}>Edit</button>
@@ -102,6 +139,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                     </Form>
                 )}
             </Formik>
+
+
         </div>
     )
 }

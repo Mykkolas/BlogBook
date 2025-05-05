@@ -93,7 +93,7 @@ const PostsList = () => {
                     {myFilteredPosts.length === 0 && (
                         filter
                             ? <p>No posts matching {filter}</p>
-                            : <p>You don't have any posts in {themeFilter} yet!</p>
+                            : <p>You don't have any posts in {themeFilter || "All"} yet!</p>
                     )}
 
                     {myFilteredPosts.map(post => (

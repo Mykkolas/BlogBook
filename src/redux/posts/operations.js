@@ -93,4 +93,43 @@ export const userUpdatePostsInfo = createAsyncThunk(
     }
 );
 
+export const addReactionToPost = createAsyncThunk(
+    "post/addReaction",
+    async ({ post, reaction, userId }, thunkAPI) => {
+        try {
+            const currentReaction = post.userReactions?.[userId];
+
+            //no req, if it is the same reaction
+            if (currentReaction === reaction) return post;
+
+            //cloning
+            const updatedReactions = { ...post.reactions };
+            const updatedUserReactions = { ...post.userReactions };
+
+            //decreasing
+            if (currentReaction) {
+                updatedReactions[currentReaction] = Math.max((updatedReactions[currentReaction] || 1) - 1, 0);
+            }
+
+            //increasing
+            updatedReactions[reaction] = (updatedReactions[reaction] || 0) + 1;
+
+            //updating user reaction, with his id
+            updatedUserReactions[userId] = reaction;
+
+            const updatedPost = {
+                ...post,
+                reactions: updatedReactions,
+                userReactions: updatedUserReactions,
+            };
+            console.log(updatedPost);
+            const res = await axiosDefault.put(`/posts/${post.id}`, updatedPost);
+            return res.data;
+
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err);
+        }
+    }
+);
+
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPost, deletePost, fetchPosts, updatePost, userUpdatePostsInfo } from "./operations";
+import { addPost, addReactionToPost, deletePost, fetchPosts, updatePost, userUpdatePostsInfo } from "./operations";
 import { userDelete } from "../auth/operations";
 
 const slice = createSlice({
@@ -40,6 +40,13 @@ const slice = createSlice({
             .addCase(userDelete.fulfilled, (state, action) => {
                 const deletedUserId = action.payload.userId;
                 state.posts = state.posts.filter(post => post.authorId !== deletedUserId);
+            })
+            .addCase(addReactionToPost.fulfilled, (state, action) => {
+                const index = state.posts.findIndex(post => post.id === action.payload.id);
+                if (index !== -1) {
+                    state.posts[index] = action.payload;
+                }
+
             })
 
 
