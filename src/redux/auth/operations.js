@@ -45,6 +45,29 @@ export const userLogout = createAsyncThunk(
     }
 );
 
+export const userDelete = createAsyncThunk(
+    '/auth/userDelete',
+    async (userId, thunkAPI) => {
+        try {
+            await axiosDefault.delete(`/users/${userId}`);
+
+            //getting my posts
+            const postsRes = await axiosDefault.get('/posts');
+            const userPosts = postsRes.data.filter(post => post.authorId === userId);
+
+            await Promise.all(
+                userPosts.map(post => axiosDefault.delete(`/posts/${post.id}`))
+            );
+
+            //return the deleted userId for post slice cleanup
+            return { userId };
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err);
+        }
+    }
+);
+
+
 
 export const userUploadAvatar = createAsyncThunk(
     'auth/avatarUpload',
@@ -60,11 +83,11 @@ export const userUploadAvatar = createAsyncThunk(
     }
 )
 
-/* export const userUpdateProfile = createAsyncThunk(
-    'auth/updateProfile',
+export const userUpdateProfile = createAsyncThunk(
+    'auth/profileUpdate',
     async ({ id, name, email }, thunkAPI) => {
         try {
-            const res = await axiosDefault.put(`users/${id}`, { name, email })
+            const res = await axiosDefault.put(`/users/${id}`, { name, email })
             return res.data
         }
         catch (err) {
@@ -72,4 +95,3 @@ export const userUploadAvatar = createAsyncThunk(
         }
     }
 )
- */

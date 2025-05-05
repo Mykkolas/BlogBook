@@ -28,13 +28,13 @@ const PostsList = () => {
     const handleStartEdit = (id) => setEditingPostId(id)
     const handleCancelEdit = () => setEditingPostId(null)
 
-    const handleSave = (updatedPost) => {
-        dispatch(updatePost(updatedPost))
+    const handleSave = async (updatedPost) => {
+        await dispatch(updatePost(updatedPost)).unwrap()
         setEditingPostId(null)
     }
 
-    const handleDelete = (postId) => {
-        dispatch(deletePost(postId))
+    const handleDelete = async (postId) => {
+        await dispatch(deletePost(postId)).unwrap()
     }
 
     const themes = ["All", "Travel", "Crypto", "Technology", "Politics", "Cooking", "Other"];

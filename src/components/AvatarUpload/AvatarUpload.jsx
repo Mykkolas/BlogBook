@@ -20,7 +20,6 @@ const AvatarUpload = () => {
         try {
             const imageUrl = await uploadToCloudinary(values.imageFile);
             await dispatch(userUploadAvatar({ userId, avatar: imageUrl })).unwrap();
-            /*  await dispatch(userUpdatePostAvatar({ id: userId, avatar: imageUrl })).unwrap() */
             resetForm();
         } catch (err) {
             console.error('Avatar upload failed:', err);

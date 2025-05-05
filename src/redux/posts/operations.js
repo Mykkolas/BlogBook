@@ -64,27 +64,29 @@ export const updatePost = createAsyncThunk(
     }
 )
 
-
-/* export const userUpdatePosts = createAsyncThunk(
-    'posts/updateUserPosts',
-    async ({ id, name }, thunkAPI) => {
+export const userUpdatePostsInfo = createAsyncThunk(
+    "posts/updatePostsInfo",
+    async ({ userId, avatar, userName }, thunkAPI) => {
         try {
             const res = await axiosDefault.get('/posts');
-            console.log(res.data);
-            const userPosts = res.data.filter(post => post.authorId === id);
+            const userPosts = res.data.filter(post => post.authorId === userId);
 
-            const updatedPosts = await Promise.all(
-                userPosts.map(async post => {
-                    const updatedPost = {
-                        ...post,
-                        authorName: name,
-                    };
-                    await axiosDefault.put(`/posts/${post.id}`, updatedPost);
-                    return updatedPost;
-                })
-            );
-            console.log(updatedPosts);
-            return updatedPosts;
+            //updating posts one-by-one, sequentially (to avoid parallel race issues)
+            for (const post of userPosts) {
+                const updatedPost = {
+                    ...post,
+                    authorName: userName,
+                    authorAvatar: avatar
+                };
+                await axiosDefault.put(`/posts/${post.id}`, updatedPost);
+            }
+
+            //waiting 100ms, giving time for backend
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            //refetching posts
+            const finalRes = await axiosDefault.get('/posts');
+            return finalRes.data;
         } catch (err) {
             return thunkAPI.rejectWithValue(err);
         }
@@ -92,25 +94,3 @@ export const updatePost = createAsyncThunk(
 );
 
 
-export const userUpdatePostAvatar = createAsyncThunk(
-    'posts/updateUserPostsAvatar',
-    async ({ id, avatar }, thunkAPI) => {
-        try {
-            const res = await axiosDefault.get('/posts')
-            const userPosts = res.data.filter(post => post.authorId === id)
-
-            const updates = userPosts.map(post =>
-                axiosDefault.put(`/posts/${post.id}`, {
-                    ...post,
-                    authorAvatar: avatar,
-                })
-            );
-
-            const responses = await Promise.all(updates);
-            return responses.map(res => res.data)
-        }
-        catch (err) {
-            return thunkAPI.rejectWithValue(err)
-        }
-    }
-) */

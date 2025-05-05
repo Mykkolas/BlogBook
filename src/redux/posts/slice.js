@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addPost, deletePost, fetchPosts, updatePost } from "./operations";
+import { addPost, deletePost, fetchPosts, updatePost, userUpdatePostsInfo } from "./operations";
+import { userDelete } from "../auth/operations";
 
 const slice = createSlice({
     name: 'posts',
@@ -14,6 +15,8 @@ const slice = createSlice({
                 state.posts = action.payload
                 state.error = null
                 state.loading = null
+                console.log(action.payload);
+
             })
             .addCase(addPost.fulfilled, (state, action) => {
                 state.posts.push(action.payload)
@@ -31,6 +34,14 @@ const slice = createSlice({
                     state.posts[index] = action.payload
                 }
             })
+            .addCase(userUpdatePostsInfo.fulfilled, (state, action) => {
+                state.posts = action.payload; // refetching all the posts, so can change all
+            })
+            .addCase(userDelete.fulfilled, (state, action) => {
+                const deletedUserId = action.payload.userId;
+                state.posts = state.posts.filter(post => post.authorId !== deletedUserId);
+            })
+
 
     }
 })
@@ -42,27 +53,3 @@ export const postsReducer = slice.reducer
 
 
 
-/*   .addCase(userUpdatePosts.fulfilled, (state, action) => {
-              const updatedPosts = action.payload;
-             updatedPosts.forEach(updatedPost => {
-                 const index = state.posts.findIndex(post => post.id === updatedPost.id);
-                 if (index !== -1) {
-                     state.posts[index] = updatedPost;
-                 }
-             }); 
-        })
-        .addCase(userUpdatePostAvatar.fulfilled, (state, action) => {
-              state.posts = state.posts.map(post =>
-                 post.authorId === action.payload.id
-                     ? { ...post, authorAvatar: action.payload.avatar } // Update authorName
-                     : post
-             ); 
-            const updatedPosts = action.payload;
-            console.log(updatedPosts);
-            updatedPosts.forEach(updatedPost => {
-                const index = state.posts.findIndex(post => post.id === updatedPost.id);
-                if (index !== -1) {
-                    state.posts[index] = updatedPost;
-                }
-            });
-        }) */
