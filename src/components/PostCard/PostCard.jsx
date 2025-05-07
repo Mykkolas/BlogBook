@@ -74,7 +74,18 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
             <p>{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
             <p>{getHighlightedText(post.body, filter)}</p>
-            <p >{new Date(post.createdAt).toLocaleDateString("en-US", {
+            {post.taggedUsers?.length > 0 && (
+                <p>
+                    Tagged:{" "}
+                    {post.taggedUsers.map((name) => (
+                        <span key={name} style={{ fontWeight: "bold" }}>@{name} </span>
+                    ))}
+                </p>
+            )}
+            {post.imageFile && (
+                <img src={post.imageFile} style={{ width: 150, height: 150, borderRadius: "10px" }} alt="" />
+            )}
+            <p>{new Date(post.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
@@ -118,6 +129,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         onCancel={() => setShowConfirm(false)}
                     />
                 )}
+
             </div>}
         </div>) : (
         <div>

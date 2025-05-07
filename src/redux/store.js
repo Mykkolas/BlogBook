@@ -15,6 +15,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './auth/slice';
 import { postsReducer } from './posts/slice';
 import { filterReducer } from './filters/slice';
+import { usersReducer } from './users/slice';
 
 const authConfig = {
     key: 'auth',
@@ -26,7 +27,8 @@ export const store = configureStore({
     reducer: {
         posts: postsReducer,
         auth: persistReducer(authConfig, authReducer),
-        filters: filterReducer
+        filters: filterReducer,
+        users: usersReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

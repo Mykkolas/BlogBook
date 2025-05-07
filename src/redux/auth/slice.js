@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userDelete, userLogin, userLogout, userRegister, userUpdateProfile, userUploadAvatar } from "./operations";
 
+export const initialState = {
+    user: {
+        name: null,
+        email: null,
+        id: null,
+        avatar: null
+    },
+    token: null,
+    isLoggedIn: false,
+}
+
 const slice = createSlice({
     name: 'auth',
-    initialState: {
-        user: {
-            name: null,
-            email: null,
-            id: null,
-            avatar: null
-        },
-        token: null,
-        isLoggedIn: false,
-    },
+    initialState,
     extraReducers: (builder) => {
         builder
             .addCase(userRegister.fulfilled, (state, action) => {
@@ -34,16 +36,11 @@ const slice = createSlice({
                 }
                 state.isLoggedIn = true
             })
-            .addCase(userLogout.fulfilled, (state) => {
-                state.user = { name: null, email: null, id: null, avatar: null };
-                state.token = null;
-                state.isLoggedIn = false;
-            })
-            .addCase(userDelete.fulfilled, (state) => {
-                state.user = { name: null, email: null, id: null, avatar: null };
-                state.token = null;
-                state.isLoggedIn = false;
-            })
+            .addCase(userLogout.fulfilled, () => initialState)
+            /* state.user = { name: null, email: null, id: null, avatar: null };
+            state.token = null;
+            state.isLoggedIn = false; */
+            .addCase(userDelete.fulfilled, () => initialState)
             .addCase(userUploadAvatar.fulfilled, (state, action) => {
                 state.user.avatar = action.payload.avatar
             })

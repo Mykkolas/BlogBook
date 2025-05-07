@@ -28,10 +28,11 @@ const AvatarUpload = () => {
     const handleValidation = (values) => {
         const errors = {};
         const file = values.imageFile;
+        console.log(file.size);
         if (!file) {
             errors.imageFile = "File is required";
-        } else if (file.size > 2 * 1024 * 1024) {
-            errors.imageFile = "File is too large (max 2MB)";
+        } else if (file.size > 3 * 1024 * 1024) {
+            errors.imageFile = "File is too large (max 3MB)";
         }
         return errors;
     }
