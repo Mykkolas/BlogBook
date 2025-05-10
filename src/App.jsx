@@ -14,6 +14,7 @@ import { RestrictedRoute } from './components/RestrictedRoute'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 import PostPage from './pages/PostPage/PostPage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import AuthLayout from './components/AuthLayout/AuthLayout'
 
 function App() {
   /*   const dispatch = useDispatch()
@@ -23,18 +24,21 @@ function App() {
 
   return (
     <>
-      <Layout>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/register' element={<RestrictedRoute component={<RegisterPage />} />} />
-            <Route path='/login' element={<RestrictedRoute component={<LoginPage />} />} />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<HomePage />} />
             <Route path='/posts' element={<PrivateRoute component={<PostPage />} />} />
             <Route path='/profile' element={<PrivateRoute component={<ProfilePage />} />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </Layout>
+          </Route>
+          <Route element={<AuthLayout />}>
+            <Route path='/register' element={<RestrictedRoute component={<RegisterPage />} />} />
+            <Route path='/login' element={<RestrictedRoute component={<LoginPage />} />} />
+          </Route>
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+
     </>
   )
 }

@@ -37,43 +37,66 @@ const PostsList = () => {
         await dispatch(deletePost(postId)).unwrap()
     }
 
-    const themes = ["All", "Travel", "Crypto", "Technology", "Politics", "Cooking", "Other"];
+    const themes = ["All", "Travel", "Crypto", "Technology", "Politics", "Cooking", "Lifestyle", "Health", "Other"];
 
     return (
         <div>
-            <div>
-                {themes.map(theme => (
-                    <button
-                        key={theme}
-                        onClick={() =>
-                            dispatch(changeThemeFilter(theme === "All" ? "" : theme))
-                        }
-                        style={{
-                            fontWeight:
-                                (theme === "All" && themeFilter === "") || themeFilter === theme
-                                    ? "bold"
-                                    : "normal"
+            <div className="flex flex-wrap gap-1 mt-1.5">
+                {themes.map((theme) => {
+                    const isActive =
+                        (theme === 'All' && themeFilter === '') || themeFilter === theme;
 
-                        }}
-                    >
-                        {theme}
-                    </button>
-                ))}
+                    return (
+                        <button
+                            key={theme}
+                            onClick={() =>
+                                dispatch(changeThemeFilter(theme === 'All' ? '' : theme))
+                            }
+                            className={`px-4 py-1  border transition 
+          ${isActive
+                                    ? 'bg-blue-600 text-white border-blue-600'
+                                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                                }`}
+                        >
+                            {theme}
+                        </button>
+                    );
+                })}
             </div>
-            <div>
-                {isLoggedIn &&
+
+            <div className="flex gap-2 mt-2">
+                {isLoggedIn && (
                     <>
-                        <button onClick={() => setActive("all")}>All posts</button>
-                        <button onClick={() => setActive("my")}>My posts</button>
+                        <button
+                            onClick={() => setActive("all")}
+                            className={`px-4 py-1  transition font-medium border 
+          ${active === "all"
+                                    ? "bg-green-600 text-white border-blue-600"
+                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
+        `}
+                        >
+                            All posts
+                        </button>
+                        <button
+                            onClick={() => setActive("my")}
+                            className={`px-4 py-1  transition font-medium border 
+          ${active === "my"
+                                    ? "bg-green-600 text-white border-blue-600"
+                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
+        `}
+                        >
+                            My posts
+                        </button>
                     </>
-                }
+                )}
             </div>
+
             {active == "all" &&
                 <ul>
                     {filteredPosts.length === 0 && (
                         filter
-                            ? <p>No posts matching search query</p>
-                            : <p>No posts to show. Be the first to post!</p>
+                            ? <p className="pt-2">No posts matching search query</p>
+                            : <p className="pt-2">No posts to show. Be the first to post!</p>
                     )}
                     {filteredPosts.map(post => (
                         <li key={post.id}>
@@ -92,8 +115,8 @@ const PostsList = () => {
                 <ul>
                     {myFilteredPosts.length === 0 && (
                         filter
-                            ? <p>No posts matching {filter}</p>
-                            : <p>You don't have any posts in {themeFilter || "All"} yet!</p>
+                            ? <p className="pt-2">No posts matching {filter}</p>
+                            : <p className="pt-2">You don't have any posts in {themeFilter || "All"} yet!</p>
                     )}
 
                     {myFilteredPosts.map(post => (

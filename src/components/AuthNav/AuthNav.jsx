@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom"
 
 const AuthNav = () => {
     return (
-        <div>
-            <NavLink to="/register">Register</NavLink>
-            <NavLink to="/login">Login</NavLink>
+        <div className="flex gap-2.5">
+            <NavLink className="btn  " to="/login">Login</NavLink>
+            <NavLink className="btn " to="/register">Register</NavLink>
         </div>
     )
 }

@@ -20,7 +20,6 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         setShowConfirm(false)
     }
 
-
     const getHighlightedText = (text, highlight, style = s.highlight) => {
         if (!highlight) return text;
 
@@ -44,7 +43,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         body: Yup.string().min(5, "Too short").max(500, "Too long").required("Required"),
     });
     return !isEditing ? (
-        <div>
+        <div className="mt-5  bg-white">
             <h3>{getHighlightedText(post.title, filter)}</h3>
             <p>Theme: {post.theme}</p>
             {post.authorAvatar.startsWith("https") ? (
@@ -59,7 +58,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         width: 50,
                         height: 50,
                         borderRadius: "50%",
-                        backgroundColor: "grey", // make with Math.random(), but no white
+                        backgroundColor: "gray", // make with Math.random(), but no white
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -74,17 +73,32 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
             <p>{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
             <p>{getHighlightedText(post.body, filter)}</p>
-            {post.taggedUsers?.length > 0 && (
-                <p>
-                    Tagged:{" "}
-                    {post.taggedUsers.map((name) => (
-                        <span key={name} style={{ fontWeight: "bold" }}>@{name} </span>
-                    ))}
-                </p>
-            )}
-            {post.imageFile && (
-                <img src={post.imageFile} style={{ width: 150, height: 150, borderRadius: "10px" }} alt="" />
-            )}
+            {
+                post.taggedUsers?.length > 0 && (
+                    <p>
+                        Tagged:{" "}
+                        {post.taggedUsers.map((name) => (
+                            <span key={name} style={{ fontWeight: "bold" }}>@{name} </span>
+                        ))}
+                    </p>
+                )
+            }
+            {
+                post.images.length > 0 && (
+                    <>
+                        {console.log(post.images)}
+                        {post.images.map((imageFile, index) => (
+                            <img
+                                key={index}
+                                src={imageFile}
+                                style={{ width: 150, height: 150, borderRadius: "10px", marginRight: "10px" }}
+                                alt={`uploaded-${index}`}
+                            />
+                        ))}
+                    </>
+                )
+            }
+
             <p>{new Date(post.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -118,21 +132,23 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
             </div>
 
-            {isEditable && <div> <button onClick={() => {
-                onStartEdit()
-            }}>Edit</button>
-                <button onClick={() => setShowConfirm(true)}>Delete</button>
-                {showConfirm && (
-                    <ConfirmModal
-                        message="Are you sure you want to delete this post?"
-                        onConfirm={handleDelete}
-                        onCancel={() => setShowConfirm(false)}
-                    />
-                )}
+            {
+                isEditable && <div> <button onClick={() => {
+                    onStartEdit()
+                }}>Edit</button>
+                    <button onClick={() => setShowConfirm(true)}>Delete</button>
+                    {showConfirm && (
+                        <ConfirmModal
+                            message="Are you sure you want to delete this post?"
+                            onConfirm={handleDelete}
+                            onCancel={() => setShowConfirm(false)}
+                        />
+                    )}
 
-            </div>}
-        </div>) : (
-        <div>
+                </div>
+            }
+        </div >) : (
+        <div  >
             <Formik initialValues={initialValues} validationSchema={validationSchema} enableReinitialize onSubmit={(values) => {
                 onSave({ ...post, ...values });
             }}>

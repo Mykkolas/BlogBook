@@ -4,6 +4,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #cfd2db;
 }
 
 *,
@@ -16,9 +17,7 @@ body {
   width: 100vw;
   height: 100vh;
   margin: 0;
-  padding: 0;
   font-family: 'Inter Tight', sans-serif;
-  background-color: #cfd2db;
   overflow-x: hidden;
 }
 
@@ -57,4 +56,8 @@ img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
+}
+
+input {
+  background: #fff;
 }
