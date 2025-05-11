@@ -26,7 +26,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className=" min-h-screen p-5 md:p-0  flex items-center justify-center bg-gray-100">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                 {/* Logo / Return */}
                 <div className="mb-6 text-center">

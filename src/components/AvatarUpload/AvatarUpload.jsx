@@ -50,7 +50,7 @@ const AvatarUpload = () => {
                 onSubmit={handleSubmit}>
                 {({ setFieldValue, isSubmitting, isValid }) => (
                     <Form>
-                        <div className="flex gap-4">
+                        <div className="flex justify-between gap-4">
                             <button
                                 type="button"
                                 className="flex btn"

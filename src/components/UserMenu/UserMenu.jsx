@@ -4,10 +4,6 @@ import { selectUser } from "../../redux/auth/selectors"
 
 const UserMenu = () => {
 
-    function getRandomColor() {
-        const colors = ['#f44336', '#2196f3', '#4caf50', '#ff9800', '#9c27b0', '#607d8b'];
-        return colors[Math.floor(Math.random() * colors.length)];
-    }
 
 
     const user = useSelector(selectUser)
@@ -27,7 +23,7 @@ const UserMenu = () => {
                                 width: 50,
                                 height: 50,
                                 borderRadius: "50%",
-                                backgroundColor: getRandomColor(), // see note below
+                                backgroundColor: "grey",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
