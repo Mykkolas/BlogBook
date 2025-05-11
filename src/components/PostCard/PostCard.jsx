@@ -43,8 +43,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         body: Yup.string().min(5, "Too short").max(500, "Too long").required("Required"),
     });
     return (
-        <div className="pb-5">
-            <div className=" mt-5 relative bg-white p-4">
+        <div className="pb-3 ">
+            <div className=" mt-5 relative bg-white p-4 ">
                 <div className="flex">
                     {post.authorAvatar.startsWith("https") ? (
                         <img
@@ -71,7 +71,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </div>
                     )}
                     <div className="pl-3 flex-row">
-                        <p className="text-xl">{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
+                        <p className="text-xl text-black">{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
                         <p className="text-gray-500  text-sm flex items-center gap-1 ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
                                 <path d="M5.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H6a.75.75 0 0 1-.75-.75V12ZM6 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H6ZM7.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H8a.75.75 0 0 1-.75-.75V12ZM8 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H8ZM9.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V10ZM10 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H10ZM9.25 14a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V14ZM12 9.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V10a.75.75 0 0 0-.75-.75H12ZM11.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H12a.75.75 0 0 1-.75-.75V12ZM12 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H12ZM13.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H14a.75.75 0 0 1-.75-.75V10ZM14 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H14Z" />
@@ -79,11 +79,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                             </svg>
                             <p>{
                                 (() => {
-                                    const date = new Date(post.createdAt);
-                                    if (isNaN(date)) return "Invalid date";
-
-                                    date.setDate(date.getDate() - 1); // problem with backend, need to make day-1
-
+                                    const date = new Date();
                                     return date.toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "long",
@@ -91,13 +87,14 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                     });
                                 })()
                             }</p>
+
                         </p>
                     </div>
                 </div>
 
                 {!isEditing ?
                     <div>
-                        <p className="pl-15">{getHighlightedText(post.body, filter)}</p>
+                        <p className="pl-15 text-black">{getHighlightedText(post.body, filter)}</p>
                     </div>
                     :
                     <div className="bg-gray-50 ml-15 border border-gray-200 rounded-lg p-4 mt-4 mb-4 ">
@@ -161,7 +158,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 }
                 {
                     post.taggedUsers?.length > 0 && (
-                        <p>
+                        <p className="pl-15">
                             Tagged:{" "}
                             {post.taggedUsers.map((name) => (
                                 <span key={name} style={{ fontWeight: "bold" }}>@{name} </span>
@@ -169,16 +166,16 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </p>
                     )
                 }
-                <p className="absolute bottom-1.5 text-sm right-1.5">{post.theme}</p>
+                <p className="absolute bottom-1.5 text-sm  text-black right-1.5">{post.theme}</p>
                 {
                     post.images.length > 0 && (
-                        <div className="flex gap-2 pl-15">
+                        <div className="flex gap-2 pl-15 pt-2 pb-2">
                             {console.log(post.images)}
                             {post.images.map((imageFile, index) => (
                                 <img // click would open modal with image
                                     key={index}
                                     src={imageFile}
-                                    style={{ width: 150, height: 150, borderRadius: "10px", marginRight: "10px" }}
+                                    style={{ width: 150, height: 150, borderRadius: "10px", border: "2px solid black" }}
                                     alt={`uploaded-${index}`}
                                 />
                             ))}

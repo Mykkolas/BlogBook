@@ -4,7 +4,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #cfd2db;
+  background-color: rgba(3, 93, 166, 0.199);
 }
 
 *,
@@ -42,7 +42,6 @@ ul {
 }
 
 a {
-  color: currentColor;
   text-decoration: none;
 }
 

@@ -20,6 +20,7 @@ const AvatarUpload = () => {
         try {
             const imageUrl = await uploadToCloudinary(values.imageFile);
             await dispatch(userUploadAvatar({ userId, avatar: imageUrl })).unwrap();
+            alert("Successful upload!")
             resetForm();
         } catch (err) {
             console.error('Avatar upload failed:', err);
@@ -43,7 +44,7 @@ const AvatarUpload = () => {
 
     return (
         <div className="p-4 mx-auto bg-white  shadow-md   border border-gray-200 mt-4">
-            <p>Upload your avatar</p>
+            <p className="text-black text-sm pb-2">Upload your avatar</p>
             <Formik
                 initialValues={{ imageFile: null }}
                 validate={handleValidation}

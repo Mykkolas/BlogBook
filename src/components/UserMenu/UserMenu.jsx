@@ -9,7 +9,7 @@ const UserMenu = () => {
     const user = useSelector(selectUser)
     return (
         <div>
-            <NavLink to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <NavLink to="/profile">
                 <div>
                     {user.avatar.startsWith("https") ? (
                         <img
@@ -37,10 +37,7 @@ const UserMenu = () => {
                     )}
                 </div>
             </NavLink>
-            <div className="hidden md:flex">
-                <NavLink to="/posts">New Post</NavLink>
-                <NavLink to="/profile">Profile</NavLink>
-            </div>
+
         </div>
     )
 }
