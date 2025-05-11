@@ -43,7 +43,7 @@ const AvatarUpload = () => {
     }
 
     return (
-        <div className="p-4 mx-auto bg-white  shadow-md   border border-gray-200 mt-4">
+        <div className="p-4 mx-auto rounded-xl bg-white  shadow-md   border border-gray-200 mt-4">
             <p className="text-black text-sm pb-2">Upload your avatar</p>
             <Formik
                 initialValues={{ imageFile: null }}

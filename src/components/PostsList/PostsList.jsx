@@ -38,13 +38,12 @@ const PostsList = () => {
         await dispatch(deletePost(postId)).unwrap()
     }
 
-
     return (
         <div>
-            <div className="flex flex-wrap gap-1  p-3">
+            <div className="flex flex-wrap gap-1 mt-2 p-2 rounded-lg glass ">
                 <button
                     onClick={() => dispatch(changeThemeFilter(''))}
-                    className={`px-4 py-1 border transition ${themeFilter === '' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-4 py-1 border transition rounded-md ${themeFilter === '' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     All
@@ -52,7 +51,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Travel'))}
-                    className={`px-3 py-1 border items-center transition flex ${themeFilter === 'Travel' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100  '
+                    className={`px-3 py-1 border items-center transition flex rounded-md ${themeFilter === 'Travel' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100  '
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -63,7 +62,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Crypto'))}
-                    className={`px-3 py-1 border items-center flex transition ${themeFilter === 'Crypto' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-3 py-1 border items-center flex transition rounded-md ${themeFilter === 'Crypto' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -74,7 +73,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Technology'))}
-                    className={`px-3 flex py-1 items-center border transition ${themeFilter === 'Technology' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-3 flex py-1 items-center border transition rounded-md ${themeFilter === 'Technology' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -85,7 +84,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Politics'))}
-                    className={`px-3 flex items-center py-1 border transition ${themeFilter === 'Politics' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-3 flex items-center py-1 border transition rounded-md ${themeFilter === 'Politics' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -96,7 +95,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Sport'))}
-                    className={`px-3 py-1 flex items-center border transition ${themeFilter === 'Sport' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-3 py-1 flex items-center border transition rounded-md ${themeFilter === 'Sport' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -107,7 +106,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Lifestyle'))}
-                    className={`px-4 flex items-center py-1 border transition ${themeFilter === 'Lifestyle' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-4 flex items-center py-1 border transition rounded-md ${themeFilter === 'Lifestyle' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -118,7 +117,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Music'))}
-                    className={`px-4 flex items-center py-1 border transition ${themeFilter === 'Music' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-4 flex items-center py-1 border transition rounded-md ${themeFilter === 'Music' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -130,7 +129,7 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Health'))}
-                    className={`px-4 flex items-center py-1 border transition ${themeFilter === 'Health' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-4 flex items-center py-1 border transition rounded-md ${themeFilter === 'Health' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -141,53 +140,56 @@ const PostsList = () => {
 
                 <button
                     onClick={() => dispatch(changeThemeFilter('Other'))}
-                    className={`px-4 py-1 border transition ${themeFilter === 'Other' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                    className={`px-4 py-1 border rounded-md transition ${themeFilter === 'Other' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
                         }`}
                 >
                     Other
                 </button>
             </div>
 
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-2 mt-4 glass items-center justify-around p-2 rounded-lg ">
                 {isLoggedIn && (
-                    <>
+                    <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive("all")}
-                            className={`px-4 py-1  transition font-medium border 
+                            className={`btn px-4 py-1  transition font-medium border shadow-none
           ${active === "all"
-                                    ? "bg-green-600 text-white border-blue-600"
-                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
+                                    ? "bg-green-600 text-white "
+                                    : "bg-green-500 text-gray-700 border-gray-300 hover:bg-green-400"}
         `}
                         >
                             All posts
                         </button>
                         <button
                             onClick={() => setActive("my")}
-                            className={`px-4 py-1  transition font-medium border 
+                            className={`btn shadow-none  px-4 py-1  transition font-medium border 
           ${active === "my"
-                                    ? "bg-green-600 text-white border-blue-600"
-                                    : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
+                                    ? "bg-green-600 text-white "
+                                    : "bg-green-500 text-gray-700 border-gray-300 hover:bg-green-400"}
         `}
                         >
                             My posts
                         </button>
-                    </>
+                    </div>
                 )}
                 <NavLink
                     to="/posts"
-                    className="btn text-pink-200 bg-gradient-to-r from-blue-500 via-purple-700 to-pink-500 
-             animate-gradient-x border-0 shadow-md transition duration-300"
+                    className="btn  text-white font-extrabold bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 
+             animate-gradient-x border-0 shadow-md transition duration-300 ml-5"
+                    onClick={() => !isLoggedIn ? alert("You should login!") : console.log("Logged in")
+                    }
                 >
                     New Post
                 </NavLink>
             </div>
 
-            {active == "all" &&
+            {
+                active == "all" &&
                 <ul>
                     {filteredPosts.length === 0 && (
                         filter
-                            ? <p className="pt-2">No posts matching search query</p>
-                            : <p className="pt-2">No posts to show. Be the first to post!</p>
+                            ? <p className="pt-2 p-3 text-sm text-black">No posts matching search query</p>
+                            : <p className="pt-2 p-3 text-sm text-black">No posts to show. Be the first to post!</p>
                     )}
                     {filteredPosts.map(post => (
                         <li key={post.id}>
@@ -202,12 +204,13 @@ const PostsList = () => {
                     ))}
                 </ul>
             }
-            {active == "my" &&
+            {
+                active == "my" &&
                 <ul>
                     {myFilteredPosts.length === 0 && (
                         filter
-                            ? <p className="pt-2">No posts matching {filter}</p>
-                            : <p className="pt-2">You don't have any posts in {themeFilter || "All"} yet!</p>
+                            ? <p className="pt-2  p-3 text-sm text-black">No posts matching {filter}</p>
+                            : <p className="pt-2  p-3 text-sm text-black">You don't have any posts in {themeFilter || "All"} yet!</p>
                     )}
 
                     {myFilteredPosts.map(post => (
@@ -224,7 +227,7 @@ const PostsList = () => {
                 </ul>
 
             }
-        </div>
+        </div >
     )
 }
 

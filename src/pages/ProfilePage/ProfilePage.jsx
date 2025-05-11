@@ -82,8 +82,8 @@ const ProfilePage = () => {
                         enableReinitialize
                     >
                         {({ isValid, dirty }) => (
-                            <Form className=" mx-auto mt-4 p-4 bg-white border border-gray-200  shadow">
-                                <div>
+                            <Form className="rounded-xl mx-auto mt-4 p-4 bg-white border border-gray-200  shadow ">
+                                <div >
                                     <label htmlFor="name-profile" className="block text-sm font-medium text-gray-700 mb-1">
                                         Name
                                     </label>
@@ -121,7 +121,7 @@ const ProfilePage = () => {
                     </Formik>
 
                 ) :
-                    <div className="p-4 mx-auto bg-white  shadow-md   border border-gray-200 mt-4">
+                    <div className="p-4 rounded-xl mx-auto bg-white  shadow-md   border border-gray-200 mt-4">
                         <div className="flex items-center justify-between pb-4">
                             <div className="flex items-center space-x-3">
                                 <UserIcon className="h-6 w-6 text-black" />
@@ -141,7 +141,7 @@ const ProfilePage = () => {
                         </div>
 
 
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center  justify-between">
                             <div className="flex items-center space-x-3">
                                 <EnvelopeIcon className="h-6 w-6 text-black" />
                                 <p className="text-lg text-gray-800">
@@ -155,7 +155,7 @@ const ProfilePage = () => {
             </div>
 
             <AvatarUpload />
-            <div className="flex justify-between mt-4 p-4  bg-white shadow-md   border border-gray-200">
+            <div className="flex justify-between mt-4 p-4 rounded-xl  bg-white shadow-md   border border-gray-200">
                 <button className="btn " onClick={() => handleLogout()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
@@ -166,7 +166,7 @@ const ProfilePage = () => {
                     </svg>
                     Delete account</button>
             </div>
-            <div className="flex flex-col mt-4 p-4  bg-white shadow-md   border border-gray-200">
+            <div className="flex flex-col rounded-xl mt-4 p-4  bg-white shadow-md   border border-gray-200">
                 <button
                     className="btn"
                     type="button"

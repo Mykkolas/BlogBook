@@ -10,7 +10,7 @@ const NavBar = () => {
              
              {isLoggedIn ? <UserMenu /> : <AuthNav />}
          </nav> */
-        <div className="navbar bg-white shadow-sm">
+        <div className="navbar  bg-gray-100 shadow-sm rounded-md">
             <div className="navbar-start">
                 {/* <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
