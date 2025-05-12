@@ -1,8 +1,11 @@
 .highlight {
-    background-color: yellow;
+    background-color: rgb(60, 255, 0);
 }
 
 .authorHighlight {
-    background-color: rgb(255, 43, 43);
-    font-weight: bold;
+    background-color: rgb(255, 251, 43);
+}
+
+.postImage:hover {
+    cursor: pointer;
 }

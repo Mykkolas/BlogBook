@@ -8,6 +8,7 @@ import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { addReactionToPost } from "../../redux/posts/operations";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectUserID } from "../../redux/posts/selectors";
+import PhotoViewerModal from "../PhotoModal/PhotoModal";
 const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditing, onDelete }) => {
     const [showConfirm, setShowConfirm] = useState(false);
     const dispatch = useDispatch()
@@ -19,6 +20,15 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         onDelete(post.id)
         setShowConfirm(false)
     }
+
+    const [viewerOpen, setViewerOpen] = useState(false);
+    const [viewerIndex, setViewerIndex] = useState(0);
+
+    const showPhotos = (index = 0) => {
+        setViewerIndex(index);
+        setViewerOpen(true);
+    };
+
 
     const getHighlightedText = (text, highlight, style = s.highlight) => {
         if (!highlight) return text;
@@ -94,6 +104,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
                 {!isEditing ?
                     <div>
+                        <p className="pl-15 text-xl font-medium text-black">{getHighlightedText(post.title, filter)}</p>
                         <p className="pl-15 text-black">{getHighlightedText(post.body, filter)}</p>
                     </div>
                     :
@@ -170,13 +181,13 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 {
                     post.images.length > 0 && (
                         <div className="flex gap-2 pl-15 pt-2 pb-2">
-                            {console.log(post.images)}
                             {post.images.map((imageFile, index) => (
-                                <img // click would open modal with image
+                                <img // click would open modal with image(s)
                                     key={index}
                                     src={imageFile}
-                                    style={{ width: 150, height: 150, borderRadius: "10px", border: "2px solid black" }}
                                     alt={`uploaded-${index}`}
+                                    className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-[10px] border border-black  cursor-pointer hover:opacity-90 transition"
+                                    onClick={() => showPhotos(index)}
                                 />
                             ))}
                         </div>
@@ -247,6 +258,14 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 </div>
 
             </div >
+            {viewerOpen && (
+                <PhotoViewerModal
+                    images={post.images}
+                    initialIndex={viewerIndex}
+                    onClose={() => setViewerOpen(false)}
+                />
+            )}
+
         </div>)
 }
 
