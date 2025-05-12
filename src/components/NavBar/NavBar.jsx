@@ -10,7 +10,7 @@ const NavBar = () => {
              
              {isLoggedIn ? <UserMenu /> : <AuthNav />}
          </nav> */
-        <div className="navbar  bg-gray-100 shadow-sm rounded-md">
+        <div className="navbar  bg-green-700 shadow-sm rounded-md">
             <div className="navbar-start">
                 {/* <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
@@ -29,7 +29,7 @@ const NavBar = () => {
                         </li>
                     </ul>
                 </div> */}
-                <NavLink className="btn btn-ghost text-xl" to="/">Blogbook</NavLink>
+                <NavLink className="btn text-xl bg-green-800 border-0 shadow-none text-white " to="/">Blogbook</NavLink>
             </div>
             <div className="navbar-center hidden md:flex">
                 {/* <ul className="menu menu-horizontal px-1">

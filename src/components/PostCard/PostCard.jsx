@@ -158,7 +158,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 }
                 {
                     post.taggedUsers?.length > 0 && (
-                        <p className="pl-15">
+                        <p className="pl-15 text-gray-600">
                             Tagged:{" "}
                             {post.taggedUsers.map((name) => (
                                 <span key={name} style={{ fontWeight: "bold" }}>@{name} </span>

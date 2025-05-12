@@ -26,12 +26,12 @@ const LoginPage = () => {
     }
 
     return (
-        <div className=" min-h-screen p-5 md:p-0  flex items-center justify-center bg-gray-100">
+        <div className=" min-h-screen p-5 md:p-0  flex items-center justify-center">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                 {/* Logo / Return */}
                 <div className="mb-6 text-center">
-                    <NavLink to="/" className="text-indigo-600 hover:underline font-medium">
-                        Here will be logo to come back
+                    <NavLink to="/" className="text-black hover:underline font-medium">
+                        BLOGBOOK
                     </NavLink>
                 </div>
 
@@ -52,7 +52,7 @@ const LoginPage = () => {
                                     name="email"
                                     type="email"
                                     id="email"
-                                    className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                                    className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-200"
 
                                 />
                             </div>
@@ -67,7 +67,7 @@ const LoginPage = () => {
                                     type="password"
                                     id="password"
                                     autoComplete="off"
-                                    className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                                    className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-200"
 
 
                                 />
@@ -76,7 +76,7 @@ const LoginPage = () => {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition"
+                                className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition"
                                 disabled={!isValid || isSubmitting}
                             >
                                 Login

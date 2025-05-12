@@ -188,8 +188,8 @@ const PostsList = () => {
                 <ul>
                     {filteredPosts.length === 0 && (
                         filter
-                            ? <p className="pt-2 p-3 text-sm text-black">No posts matching search query</p>
-                            : <p className="pt-2 p-3 text-sm text-black">No posts to show. Be the first to post!</p>
+                            ? <p className="pt-2 p-3 text-sm text-green-200">No posts matching search query</p>
+                            : <p className="pt-2 p-3 text-sm text-green-200">No posts to show. Be the first to post!</p>
                     )}
                     {filteredPosts.map(post => (
                         <li key={post.id}>
@@ -209,8 +209,8 @@ const PostsList = () => {
                 <ul>
                     {myFilteredPosts.length === 0 && (
                         filter
-                            ? <p className="pt-2  p-3 text-sm text-black">No posts matching {filter}</p>
-                            : <p className="pt-2  p-3 text-sm text-black">You don't have any posts in {themeFilter || "All"} yet!</p>
+                            ? <p className="pt-2  p-3 text-sm text-green-200">No posts matching {filter}</p>
+                            : <p className="pt-2  p-3 text-sm text-green-200">You don't have any posts in {themeFilter || "All"} yet!</p>
                     )}
 
                     {myFilteredPosts.map(post => (
