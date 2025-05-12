@@ -188,7 +188,7 @@ const PostsList = () => {
                 <ul>
                     {filteredPosts.length === 0 && (
                         filter
-                            ? <p className="pt-2 p-3 text-sm text-green-200">No posts matching search query</p>
+                            ? <p className="pt-2 p-3 text-sm text-green-200">No posts matching {filter}</p>
                             : <p className="pt-2 p-3 text-sm text-green-200">No posts to show. Be the first to post!</p>
                     )}
                     {filteredPosts.map(post => (

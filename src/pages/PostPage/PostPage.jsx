@@ -7,6 +7,7 @@ import { selectAllUsers } from "../../redux/users/selectors";
 import { selectUserName } from "../../redux/auth/selectors";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../../redux/users/operations";
+import { components } from 'react-select';
 import Select from "react-select";
 import axios from "axios";
 const PostPage = () => {
@@ -37,6 +38,26 @@ const PostPage = () => {
         label: user.name,
     }));
 
+    const DropdownIndicator = (props) => {
+        const { menuIsOpen } = props.selectProps;
+
+        return (
+            <components.DropdownIndicator {...props}>
+                <svg
+                    className={`w-4 h-4 text-green-600 transition-transform duration-200 ${menuIsOpen ? 'rotate-180' : ''
+                        }`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </components.DropdownIndicator>
+        );
+    };
+
+
     const initialValues = {
         title: "",
         body: "",
@@ -44,6 +65,19 @@ const PostPage = () => {
         taggedUsers: [],
         images: []
     }
+
+    const themeOptions = [
+        { value: '', label: 'Select theme' },
+        { value: 'Travel', label: 'Travel' },
+        { value: 'Technology', label: 'Technology' },
+        { value: 'Crypto', label: 'Crypto' },
+        { value: 'Politics', label: 'Politics' },
+        { value: 'Health', label: 'Health' },
+        { value: 'Lifestyle', label: 'Lifestyle' },
+        { value: 'Music', label: 'Music' },
+        { value: 'Sport', label: 'Sport' },
+        { value: 'Other', label: 'Other' },
+    ];
 
     const uploadToCloudinary = async (file) => {
         const formData = new FormData();
@@ -77,8 +111,8 @@ const PostPage = () => {
     }
 
     return (
-        <div className="mt-10  bg-white p-4 mb-5  shadow-md border border-gray-200">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800">Create a Post</h2>
+        <div className="mt-10  bg-white p-4 mb-5 rounded-md shadow-md border border-gray-200">
+            {/* <h2 className="text-2xl font-semibold mb-6 text-gray-800">Create a Post</h2> */}
 
             <Formik
                 initialValues={initialValues}
@@ -88,7 +122,7 @@ const PostPage = () => {
                 {({ isValid, isSubmitting, values, setFieldValue }) => (
                     <Form >
                         {/* Title */}
-                        <div>
+                        <div className="relative mb-6">
                             <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1 mt-4">
                                 Title
                             </label>
@@ -96,13 +130,13 @@ const PostPage = () => {
                                 name="title"
                                 type="text"
                                 id="title"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none"
                             />
-                            <ErrorMessage name="title" component="div" className="text-red-600 text-sm mt-1" />
+                            <ErrorMessage name="title" component="div" className="text-red-600 text-sm absolute" />
                         </div>
 
                         {/* Body */}
-                        <div>
+                        <div className="relative mb-6">
                             <label htmlFor="body" className="block text-sm font-medium text-gray-700 mb-1">
                                 Body
                             </label>
@@ -110,21 +144,23 @@ const PostPage = () => {
                                 name="body"
                                 as="textarea"
                                 id="body"
-                                rows="10"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+                                rows="8"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
                             />
-                            <ErrorMessage name="body" component="div" className="text-red-600 text-sm mt-1" />
+                            <ErrorMessage name="body" component="div" className="text-red-600 text-sm  absolute" />
                         </div>
 
                         {/* Tagged Users */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium text-gray-700  mb-1">
                                 Tag Users
                             </label>
                             <Field name="taggedUsers">
                                 {({ field, form }) => (
                                     <Select
+                                        menuPlacement="top"
                                         isMulti
+                                        components={{ DropdownIndicator }}
                                         name="taggedUsers"
                                         options={userOptions}
                                         placeholder="Tag users..."
@@ -133,21 +169,60 @@ const PostPage = () => {
                                             const values = selectedOptions.map(option => option.value);
                                             form.setFieldValue("taggedUsers", values);
                                         }}
+                                        styles={{
+                                            control: (base, state) => ({
+                                                ...base,
+                                                backgroundColor: 'white',
+                                                borderColor: state.isFocused ? '#10b981' : '#d1d5db',
+                                                boxShadow: state.isFocused ? '0 0 0 2px rgba(16, 185, 129, 0.4)' : 'none',
+                                                '&:hover': {
+                                                    borderColor: '#10b981',
+                                                },
+                                            }),
+                                            option: (base, state) => ({
+                                                ...base,
+                                                backgroundColor: state.isFocused
+                                                    ? '#d1fae5'
+                                                    : 'white',
+                                                color: state.isFocused ? '#065f46' : '#374151', // green-800 text
+                                                cursor: 'pointer',
+                                            }),
+                                            multiValue: (base) => ({
+                                                ...base,
+                                                backgroundColor: '#d1fae5',
+                                            }),
+                                            multiValueLabel: (base) => ({
+                                                ...base,
+                                                color: '#065f46',
+                                            }),
+                                            multiValueRemove: (base) => ({
+                                                ...base,
+                                                color: '#065f46',
+                                                ':hover': {
+                                                    backgroundColor: '#10b981',
+                                                    color: 'white',
+                                                },
+                                            }),
+                                        }}
                                     />
                                 )}
                             </Field>
+
                         </div>
 
                         {/* File Upload */}
                         <div>
-                            <label htmlFor="images" className="block text-sm font-medium text-gray-700 mb-2">
+                            <label htmlFor="images" className="block text-sm font-medium text-gray-700 mb-2 mt-4">
                                 Upload photos (max. 2)
                             </label>
                             <button
                                 type="button"
                                 onClick={() => document.getElementById("images").click()}
-                                className="px-4 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded hover:bg-gray-200 transition"
+                                className="btn px-4 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded hover:bg-gray-200 transition"
                             >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+                                </svg>
                                 Choose files
                             </button>
                             <input
@@ -166,7 +241,7 @@ const PostPage = () => {
                                     setFieldValue("images", files);
                                 }}
                             />
-                            <ErrorMessage name="images" component="div" className="text-red-600 text-sm mt-1" />
+                            <ErrorMessage name="images" component="div" className="text-red-600 text-sm  absolute" />
 
                             {values.images && values.images.length > 0 && (
                                 <div className="flex gap-4 mt-4">
@@ -183,27 +258,45 @@ const PostPage = () => {
                         </div>
 
                         {/* Theme */}
-                        <div>
-                            <label htmlFor="theme" className="block text-sm font-medium text-gray-700 mb-1">
+                        <div className="relative mb-3">
+                            <label htmlFor="theme" className="block text-sm font-medium text-gray-700 mb-1 mt-2">
                                 Select Theme
                             </label>
-                            <Field
-                                as="select"
-                                name="theme"
-                                id="theme"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-                            >
-                                <option value="">Select theme</option>
-                                <option value="Travel">Travel</option>
-                                <option value="Technology">Technology</option>
-                                <option value="Crypto">Crypto</option>
-                                <option value="Politics">Politics</option>
-                                <option value="Cooking">Cooking</option>
-                                <option value="Health">Health</option>
-                                <option value="Lifestyle">Lifestyle</option>
-                                <option value="Other">Other</option>
+                            <Field name="theme">
+                                {({ field, form }) => (
+                                    <Select
+                                        name="theme"
+                                        menuPlacement="top"
+                                        components={{ DropdownIndicator }}
+                                        options={themeOptions}
+                                        value={themeOptions.find(option => option.value === field.value)}
+                                        onChange={option => form.setFieldValue('theme', option.value)}
+                                        placeholder="Select theme"
+                                        styles={{
+                                            control: (base, state) => ({
+                                                ...base,
+                                                backgroundColor: 'white',
+                                                borderColor: state.isFocused ? '#10b981' : '#d1d5db', // green-500 or gray-300
+                                                boxShadow: state.isFocused ? '0 0 0 2px rgba(16, 185, 129, 0.4)' : 'none',
+                                                '&:hover': {
+                                                    borderColor: '#10b981',
+                                                },
+                                            }),
+                                            option: (base, state) => ({
+                                                ...base,
+                                                backgroundColor: state.isFocused ? '#d1fae5' : 'white', // green-100 on hover
+                                                color: state.isFocused ? '#065f46' : '#374151', // green-800 vs gray-700
+                                                cursor: 'pointer',
+                                            }),
+                                            singleValue: (base) => ({
+                                                ...base,
+                                                color: 'gray',
+                                            }),
+                                        }}
+                                    />
+                                )}
                             </Field>
-                            <ErrorMessage name="theme" component="div" className="text-red-600 text-sm mt-1" />
+                            <ErrorMessage name="theme" component="div" className="text-red-600 text-sm  absolute" />
                         </div>
 
                         {/* Submit */}
@@ -211,7 +304,7 @@ const PostPage = () => {
                             <button
                                 type="submit"
                                 disabled={!isValid || isSubmitting}
-                                className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded hover:bg-indigo-700 transition"
+                                className="w-full btn py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition"
                             >
                                 {isSubmitting ? 'Posting...' : 'Post'}
                             </button>

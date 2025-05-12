@@ -114,7 +114,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         <Field
                                             name="title"
                                             id="title"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                                         />
                                         <ErrorMessage name="title" component="div" className="text-red-600 text-xs mt-1" />
                                     </div>
@@ -129,7 +129,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                             as="textarea"
                                             id="body"
                                             rows="4"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                                         />
                                         <ErrorMessage name="body" component="div" className="text-red-600 text-xs mt-1" />
                                     </div>
