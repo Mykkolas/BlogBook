@@ -54,7 +54,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
     });
     return (
         <div className="pb-3 ">
-            <div className=" mt-5 relative bg-white p-4 rounded-md ">
+            <div className=" mt-5 relative  bg-white p-4 rounded-md ">
                 <div className="flex">
                     {post.authorAvatar.startsWith("https") ? (
                         <img
