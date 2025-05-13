@@ -65,7 +65,7 @@ const ProfilePage = () => {
 
     }
     return (
-        <div>
+        <div className="min-h-screen md:px-20 lg:px-40 md:pt-10 ">
             {showConfirm && (
                 <ConfirmModal
                     message="Are you sure you want to delete your account? *It will also delete your posts"
@@ -168,7 +168,7 @@ const ProfilePage = () => {
             </div>
             <div className="flex flex-col rounded-xl mt-4 p-4  bg-white shadow-md   border border-gray-200">
                 <button
-                    className="btn"
+                    className="btn w-50"
                     type="button"
                     onClick={handleUpdate}
                 >

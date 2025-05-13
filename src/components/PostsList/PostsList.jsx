@@ -6,7 +6,7 @@ import PostCard from "../PostCard/PostCard"
 import { selectIsLoggedIn } from "../../redux/auth/selectors"
 import { selectPostsFilter, selectThemeFilter } from "../../redux/filters/selectors"
 import { changeThemeFilter } from "../../redux/filters/slice"
-import { NavLink } from "react-router-dom"
+import { Navigate, NavLink, useNavigate } from "react-router-dom"
 import SearchBox from "../SearchBox/SearchBox"
 
 const PostsList = () => {
@@ -22,6 +22,7 @@ const PostsList = () => {
             setEditingPostId(null) // fixed: user could still edit without being logged in
         }
     }, [isLoggedIn])
+    const navigate = useNavigate();
     const userId = useSelector(selectUserID)
     const filter = useSelector(selectPostsFilter)
     const filteredPosts = useSelector(selectFilteredPosts)
@@ -40,9 +41,9 @@ const PostsList = () => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 w-full ">
+        <div className="flex flex-col md:flex-row gap-6 w-full ">
             {/* Left Sidebar */}
-            <div className="lg:w-1/3 flex-1 space-y-4 lg:mt-5">
+            <div className="md:w-1/3 flex-1 space-y-4 lg:mt-5">
                 {/* Theme Filter Buttons */}
                 <SearchBox />
                 <div className="flex flex-wrap gap-2 p-2 rounded-lg glass">
@@ -168,15 +169,21 @@ const PostsList = () => {
                         >
                             My posts
                         </button>
-                        <NavLink
-                            to="/posts"
+                        <button
                             className="btn  text-white font-extrabold bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 
-             animate-gradient-x border-0 md:w-60 shadow-md transition duration-300 ml-5"
-                            onClick={() => !isLoggedIn ? alert("You should login!") : console.log("Logged in")
+             animate-gradient-x border-0 md:w-30 lg:w-60 shadow-md transition duration-300 ml-5"
+                            onClick={() => {
+                                if (!isLoggedIn) {
+                                    alert("Log in")
+                                    return
+                                }
+                                navigate("/posts")
+                            }
+
                             }
                         >
                             New Post
-                        </NavLink>
+                        </button>
                     </div>
 
 

@@ -186,7 +186,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                     key={index}
                                     src={imageFile}
                                     alt={`uploaded-${index}`}
-                                    className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] rounded-[10px] border border-black  cursor-pointer hover:opacity-90 transition"
+                                    className="w-[100px] h-[100px] md:w-[120px] md:h-[150px] lg:w-[200px] lg:h-[200px] rounded-[10px] border border-black  cursor-pointer hover:opacity-90 transition"
                                     onClick={() => showPhotos(index)}
                                 />
                             ))}

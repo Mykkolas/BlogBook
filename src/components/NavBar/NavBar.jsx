@@ -6,9 +6,9 @@ import { NavLink } from "react-router-dom"
 const NavBar = () => {
     const isLoggedIn = useSelector(selectIsLoggedIn)
     return (
-        <div className="navbar  bg-green-700 shadow-sm rounded-md">
+        <div className="navbar lg:p-8  bg-green-700 shadow-sm rounded-md">
             <div className="navbar-start">
-                <NavLink className="btn text-xl bg-green-800 border-0 shadow-none text-white " to="/">Blogbook</NavLink>
+                <NavLink className="btn lg:p-8 text-xl bg-green-800 border-0 shadow-none text-white " to="/">Blogbook</NavLink>
             </div>
             <div className="navbar-center hidden md:flex">
             </div>

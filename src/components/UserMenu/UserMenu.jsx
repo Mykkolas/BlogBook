@@ -13,7 +13,7 @@ const UserMenu = () => {
                 <div>
                     {user.avatar.startsWith("https") ? (
                         <img
-                            style={{ width: 50, height: 50, borderRadius: "50%" }}
+                            style={{ width: 70, height: 70, borderRadius: "50%" }}
                             src={user.avatar}
                             alt={`${user.name}'s avatar`}
                         />

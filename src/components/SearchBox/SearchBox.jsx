@@ -26,6 +26,7 @@ const SearchBox = () => {
                     placeholder="Search..."
                     onChange={handleFilterChange}
                     value={filter || ''}
+                    maxLength={30}
                     className="w-full rounded-md pl-10 pr-10 text-green-100 py-2 glass shadow-sm border border-gray-500 focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-200"
                 />
                 {filter && (
