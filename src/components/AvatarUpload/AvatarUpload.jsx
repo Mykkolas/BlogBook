@@ -27,34 +27,38 @@ const AvatarUpload = () => {
         }
     }
     const handleValidation = (values) => {
-        if (!values.imageFile) {
-            return;
-        }
-
         const errors = {};
         const file = values.imageFile;
-        console.log(file.size);
-        if (!file) {
-            errors.imageFile = "File is required";
-        } else if (file.size > 3 * 1024 * 1024) {
-            errors.imageFile = "File is too large (max 3MB)";
+        if (file.size > 4 * 1024 * 1024) {
+            console.log("error!");
+            errors.imageFile = "File is too large (max 4MB)";
         }
+
         return errors;
-    }
+    };
 
     return (
-        <div className="p-4 mx-auto rounded-xl bg-white  shadow-md   border border-gray-200 mt-4">
+        <div className="p-4 pb-7 mx-auto rounded-xl bg-white   shadow-md   border border-gray-200 mt-4">
             <p className="text-black text-sm pb-2">Upload your avatar</p>
             <Formik
                 initialValues={{ imageFile: null }}
                 validate={handleValidation}
                 onSubmit={handleSubmit}>
-                {({ setFieldValue, isSubmitting, isValid }) => (
+                {({ setFieldValue, isSubmitting, isValid, values, setTouched }) => (
                     <Form>
-                        <div className="flex justify-between gap-4">
+                        <div className="flex justify-between relative gap-4">
+                            {/*  {values.imageFile && (
+                                <div className="relative">
+                                    <img
+                                        src={URL.createObjectURL(values.imageFile)}
+                                        alt="Preview"
+                                        className=" w-[70px]  max-h-80 rounded shadow border"
+                                    />
+                                </div>
+                            )} */}
                             <button
                                 type="button"
-                                className="flex btn"
+                                className="btn "
                                 onClick={() => document.getElementById("imageFile").click()}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -70,8 +74,10 @@ const AvatarUpload = () => {
                                 style={{ display: "none" }}
                                 onChange={(e) => {
                                     setFieldValue('imageFile', e.currentTarget.files[0])
+                                    setTouched({ imageFile: true });
                                 }}
                             />
+
                             <button type="submit" className="flex btn" disabled={isSubmitting || !isValid}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -80,8 +86,11 @@ const AvatarUpload = () => {
 
 
                             </button>
-                            <ErrorMessage name="imageFile" component="div" style={{ color: 'red' }} />
+                            <ErrorMessage name="imageFile">
+                                {(msg) => <div className="absolute top-8 text-red-500 text-sm mt-2">{msg}</div>}
+                            </ErrorMessage>
                         </div >
+
 
 
                     </Form >

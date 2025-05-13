@@ -92,7 +92,7 @@ const ProfilePage = () => {
                                         type="text"
                                         id="name-profile"
                                         autoComplete="off"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-600 text-gray-800"
                                     />
                                 </div>
 
@@ -104,7 +104,7 @@ const ProfilePage = () => {
                                         name="email"
                                         type="email"
                                         id="email-profile"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-600 text-gray-800"
                                     />
                                 </div>
 

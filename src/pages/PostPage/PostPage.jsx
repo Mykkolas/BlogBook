@@ -70,6 +70,7 @@ const PostPage = () => {
         { value: '', label: 'Select theme' },
         { value: 'Travel', label: 'Travel' },
         { value: 'Technology', label: 'Technology' },
+        { value: 'Travel', label: 'Travel' },
         { value: 'Crypto', label: 'Crypto' },
         { value: 'Politics', label: 'Politics' },
         { value: 'Health', label: 'Health' },
