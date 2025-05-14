@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { userDelete, userLogout, userUpdateProfile } from "../../redux/auth/operations"
 import { selectUserAvatar, selectUserEmail, selectUserName } from "../../redux/auth/selectors"
 import AvatarUpload from "../../components/AvatarUpload/AvatarUpload"
-import { Field, Form, Formik } from "formik"
+import { Field, Form, Formik, ErrorMessage } from "formik"
 import * as Yup from "yup";
 import { useState } from "react"
 import { selectUserID } from "../../redux/posts/selectors"
@@ -82,11 +82,17 @@ const ProfilePage = () => {
                         enableReinitialize
                     >
                         {({ isValid, dirty }) => (
-                            <Form className="rounded-xl mx-auto mt-4 p-4 bg-white border border-gray-200  shadow ">
-                                <div >
+                            <Form className="rounded-xl mx-auto mt-4 p-4 bg-white border border-gray-200 shadow ">
+                                {/* Name Field */}
+                                <div className="relative pb-4 mb-3">
                                     <label htmlFor="name-profile" className="block text-sm font-medium text-gray-700 mb-1">
                                         Name
                                     </label>
+                                    <ErrorMessage
+                                        name="name"
+                                        component="div"
+                                        className="absolute -bottom-1 left-0 text-xs text-red-500"
+                                    />
                                     <Field
                                         name="name"
                                         type="text"
@@ -96,10 +102,16 @@ const ProfilePage = () => {
                                     />
                                 </div>
 
-                                <div>
-                                    <label htmlFor="email-profile" className="block text-sm font-medium text-gray-700 mb-1 mt-4">
+                                {/* Email Field */}
+                                <div className="relative pb-4 mb-3">
+                                    <label htmlFor="email-profile" className="block text-sm font-medium text-gray-700 mb-1">
                                         Email
                                     </label>
+                                    <ErrorMessage
+                                        name="email"
+                                        component="div"
+                                        className="absolute -bottom-1 left-0 text-xs text-red-500"
+                                    />
                                     <Field
                                         name="email"
                                         type="email"
@@ -108,6 +120,7 @@ const ProfilePage = () => {
                                     />
                                 </div>
 
+                                {/* Buttons */}
                                 <div className="flex space-x-3 pt-4">
                                     <button className="btn" type="submit" disabled={!isValid || !dirty}>
                                         Save
@@ -119,7 +132,6 @@ const ProfilePage = () => {
                             </Form>
                         )}
                     </Formik>
-
                 ) :
                     <div className="p-4 rounded-xl mx-auto bg-white  shadow-md   border border-gray-200 mt-4">
                         <div className="flex items-center justify-between pb-4">

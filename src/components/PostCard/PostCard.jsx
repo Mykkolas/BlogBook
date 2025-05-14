@@ -89,14 +89,17 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                             </svg>
                             <p>{
                                 (() => {
-                                    const date = new Date();
-                                    return date.toLocaleDateString("en-US", {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                    });
+                                    const date = new Date(post.createdAt);
+                                    return isNaN(date)
+                                        ? "Invalid date"
+                                        : date.toLocaleDateString("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        });
                                 })()
                             }</p>
+
 
                         </p>
                     </div>
@@ -118,20 +121,20 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                             {({ isValid, dirty }) => (
                                 <Form className="space-y-4">
                                     {/* Title Field */}
-                                    <div>
+                                    <div className="relative pb-3">
                                         <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
                                             Title
                                         </label>
                                         <Field
                                             name="title"
                                             id="title"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                                            className="w-full  px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                                         />
-                                        <ErrorMessage name="title" component="div" className="text-red-600 text-xs mt-1" />
+                                        <ErrorMessage name="title" component="div" className="text-red-600 text-xs mt-1 absolute" />
                                     </div>
 
                                     {/* Body Field */}
-                                    <div>
+                                    <div className="relative">
                                         <label htmlFor="body" className="block text-sm font-medium text-gray-700 mb-1">
                                             Body
                                         </label>
@@ -142,7 +145,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                             rows="4"
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                                         />
-                                        <ErrorMessage name="body" component="div" className="text-red-600 text-xs mt-1" />
+                                        <ErrorMessage name="body" component="div" className="text-red-600 text-xs mt-1 absolute" />
                                     </div>
 
                                     {/* Buttons */}

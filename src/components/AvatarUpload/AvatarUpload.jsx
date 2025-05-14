@@ -44,7 +44,7 @@ const AvatarUpload = () => {
                 initialValues={{ imageFile: null }}
                 validate={handleValidation}
                 onSubmit={handleSubmit}>
-                {({ setFieldValue, isSubmitting, isValid, values, setTouched }) => (
+                {({ setFieldValue, isSubmitting, isValid, setTouched }) => (
                     <Form>
                         <div className="flex justify-between relative gap-4">
                             {/*  {values.imageFile && (

@@ -14,16 +14,23 @@ export const selectFilteredUserPosts = createSelector(
             ? posts.filter(post => post.theme === themeFilter)
             : posts;
 
-        return filteredByTheme.filter(post => {
+        const filteredByText = filteredByTheme.filter(post => {
             const matchesFilter =
                 !filter ||
                 post.title.toLowerCase().includes(filter.toLowerCase()) ||
                 post.body.toLowerCase().includes(filter.toLowerCase()) ||
-                post.authorName.toLowerCase().includes(filter.toLowerCase())
+                post.authorName.toLowerCase().includes(filter.toLowerCase());
             return matchesFilter;
         });
+
+        return filteredByText.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            return dateB - dateA; // newest first
+        });
     }
-)
+);
+
 export const selectLoading = (state) => state.posts.loading
 export const selectError = (state) => state.posts.error
 export const selectFilteredPosts = createSelector(
@@ -33,15 +40,22 @@ export const selectFilteredPosts = createSelector(
             ? posts.filter(post => post.theme === themeFilter)
             : posts;
 
-        return filteredByTheme.filter(post => {
+        const filteredByText = filteredByTheme.filter(post => {
             const matchesFilter =
                 !filter ||
                 post.title.toLowerCase().includes(filter.toLowerCase()) ||
                 post.body.toLowerCase().includes(filter.toLowerCase()) ||
-                post.authorName.toLowerCase().includes(filter.toLowerCase())
+                post.authorName.toLowerCase().includes(filter.toLowerCase());
             return matchesFilter;
+        });
+
+        return filteredByText.sort((a, b) => {
+            const dateA = new Date(a.createdAt);
+            const dateB = new Date(b.createdAt);
+            return dateB - dateA; // newest posts first
         });
     }
 );
+
 
 

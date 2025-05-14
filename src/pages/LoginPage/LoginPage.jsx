@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik"
+import { Field, Form, Formik, ErrorMessage } from "formik"
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { userLogin } from "../../redux/auth/operations";
@@ -44,39 +44,47 @@ const LoginPage = () => {
                     {({ isValid, isSubmitting }) => (
                         <Form className="space-y-5">
                             {/* Email Field */}
-                            <div>
+                            <div className="relative ">
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                                     Email
                                 </label>
+                                <ErrorMessage
+                                    name="email"
+                                    component="div"
+                                    className="absolute -bottom-5 left-0 text-xs text-red-500"
+                                />
                                 <Field
                                     name="email"
                                     type="email"
                                     id="email"
                                     className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-200"
-
                                 />
                             </div>
 
                             {/* Password Field */}
-                            <div>
+                            <div className="relative pt-3">
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                                     Password
                                 </label>
+                                <ErrorMessage
+                                    name="password"
+                                    component="div"
+                                    className="absolute -bottom-5 left-0 text-xs text-red-500"
+                                />
                                 <Field
                                     name="password"
                                     type="password"
                                     id="password"
                                     autoComplete="off"
                                     className="w-full pl-4 pr-4 py-2 bg-white shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 transition duration-200"
-
-
                                 />
                             </div>
+
 
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition"
+                                className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition mt-4"
                                 disabled={!isValid || isSubmitting}
                             >
                                 Login

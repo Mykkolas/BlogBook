@@ -101,7 +101,8 @@ const PostPage = () => {
                 body: values.body.trim(),
                 theme: values.theme,
                 taggedUsers: values.taggedUsers,
-                images: uploadedUrls
+                images: uploadedUrls,
+                createdAt: new Date().toISOString()
             })).unwrap();
             resetForm()
             navigate("/")
