@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { userLogin } from "../../redux/auth/operations";
 import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 const LoginPage = () => {
     const dispatch = useDispatch()
     const validationSchema = Yup.object().shape({
@@ -18,9 +19,11 @@ const LoginPage = () => {
     const handleSubmit = async (values, { resetForm }) => {
         try {
             await dispatch(userLogin(values)).unwrap()
+            toast.success("Logged in!")
             resetForm()
         }
         catch (err) {
+            toast.error(`Failed to login! ${err}`)
             console.log(err);
         }
     }

@@ -9,6 +9,7 @@ import { addReactionToPost } from "../../redux/posts/operations";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectUserID } from "../../redux/posts/selectors";
 import PhotoViewerModal from "../PhotoModal/PhotoModal";
+import toast from "react-hot-toast";
 const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditing, onDelete }) => {
     const [showConfirm, setShowConfirm] = useState(false);
     const dispatch = useDispatch()
@@ -253,9 +254,9 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </div>
                     ) : (
                         <div className="flex items-center gap-4 text-gray-500 text-sm pl-14">
-                            <p>👍 {post.reactions?.like || 0}</p>
-                            <p>❤️ {post.reactions?.love || 0}</p>
-                            <p>😂 {post.reactions?.laugh || 0}</p>
+                            <p onClick={() => toast.error("Log in to react with 👍")}>👍 {post.reactions?.like || 0}</p>
+                            <p onClick={() => toast.error("Log in to react with ❤️")}>❤️ {post.reactions?.love || 0}</p>
+                            <p onClick={() => toast.error("Log in to react with 😂")}>😂 {post.reactions?.laugh || 0}</p>
                         </div>
                     )}
                 </div>

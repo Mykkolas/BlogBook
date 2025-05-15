@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { deletePost, fetchPosts, updatePost } from "../../redux/posts/operations"
-import { selectFilteredPosts, selectFilteredUserPosts, selectUserID } from "../../redux/posts/selectors"
+import { selectFilteredPosts, selectFilteredUserPosts, selectLoading, selectUserID } from "../../redux/posts/selectors"
 import PostCard from "../PostCard/PostCard"
 import { selectIsLoggedIn } from "../../redux/auth/selectors"
 import { selectPostsFilter, selectThemeFilter } from "../../redux/filters/selectors"
 import { changeThemeFilter } from "../../redux/filters/slice"
 import { useNavigate } from "react-router-dom"
 import SearchBox from "../SearchBox/SearchBox"
+import Loader from "../Loader/Loader"
+import toast from "react-hot-toast"
 
 const PostsList = () => {
     const isLoggedIn = useSelector(selectIsLoggedIn)
+    const isLoading = useSelector(selectLoading)
     const dispatch = useDispatch()
     const [active, setActive] = useState("all")
     const [editingPostId, setEditingPostId] = useState(null)
@@ -32,12 +35,30 @@ const PostsList = () => {
     const handleCancelEdit = () => setEditingPostId(null)
 
     const handleSave = async (updatedPost) => {
-        await dispatch(updatePost(updatedPost)).unwrap()
-        setEditingPostId(null)
+        try {
+            await dispatch(updatePost(updatedPost)).unwrap()
+            setEditingPostId(null)
+            toast("Saved successfully!", {
+                icon: '💾'
+            })
+        }
+        catch (err) {
+            toast.error("Failed to save your post! Try again!")
+            console.log(err);
+        }
     }
 
     const handleDelete = async (postId) => {
-        await dispatch(deletePost(postId)).unwrap()
+        try {
+            await dispatch(deletePost(postId)).unwrap()
+            toast("Post deleted successfully!", {
+                icon: '👉🏻🗑️'
+            })
+        }
+        catch (err) {
+            toast.error("Failed to delete! Try one more time!")
+            console.log(err);
+        }
     }
 
     return (
@@ -166,7 +187,7 @@ const PostsList = () => {
                         <button
                             onClick={() => {
                                 if (!isLoggedIn) {
-                                    alert("You should login!")
+                                    toast.error("Login to view your posts!")
                                     return
                                 }
                                 console.log("Logged in")
@@ -184,7 +205,7 @@ const PostsList = () => {
              animate-gradient-x border-0 md:w-30 lg:w-60 shadow-md transition duration-300 ml-5"
                             onClick={() => {
                                 if (!isLoggedIn) {
-                                    alert("Log in")
+                                    toast.error("Login to post!")
                                     return
                                 }
                                 navigate("/posts")
@@ -199,69 +220,74 @@ const PostsList = () => {
 
                 </div>
             </div>
-
-            {/* Right Column — Posts */}
-            <div className="lg:w-2/3 flex-1">
-                {active === 'all' && (
-                    <ul>
-                        {filteredPosts.length === 0 ? (
-                            filter ? (
-                                <p className="pt-2 p-3 text-sm text-green-200">
-                                    No posts matching "{filter}"
-                                </p>
+            <>
+                {/* Right Column — Posts */}
+                <div className="lg:w-2/3 flex-1">
+                    {active === 'all' && (
+                        <ul>
+                            {filteredPosts.length === 0 ? (
+                                isLoading ? (
+                                    <Loader />
+                                ) : filter ? (
+                                    <p className="pt-2 p-3 text-sm text-green-200">
+                                        No posts matching "{filter}"
+                                    </p>
+                                ) : (
+                                    <p className="pt-2 p-3 text-sm text-green-200">
+                                        No posts to show. Be the first to post!
+                                    </p>
+                                )
                             ) : (
-                                <p className="pt-2 p-3 text-sm text-green-200">
-                                    No posts to show. Be the first to post!
-                                </p>
-                            )
-                        ) : (
-                            filteredPosts.map((post) => (
-                                <li key={post.id}>
-                                    <PostCard
-                                        post={post}
-                                        isEditable={post.authorId === userId}
-                                        isEditing={editingPostId === post.id}
-                                        onStartEdit={() => handleStartEdit(post.id)}
-                                        onCancelEdit={handleCancelEdit}
-                                        onSave={handleSave}
-                                        onDelete={handleDelete}
-                                    />
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                )}
+                                filteredPosts.map((post) => (
+                                    <li key={post.id}>
+                                        <PostCard
+                                            post={post}
+                                            isEditable={post.authorId === userId}
+                                            isEditing={editingPostId === post.id}
+                                            onStartEdit={() => handleStartEdit(post.id)}
+                                            onCancelEdit={handleCancelEdit}
+                                            onSave={handleSave}
+                                            onDelete={handleDelete}
+                                        />
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    )}
 
-                {active === 'my' && (
-                    <ul>
-                        {myFilteredPosts.length === 0 ? (
-                            filter ? (
-                                <p className="pt-2 p-3 text-sm text-green-200">
-                                    No posts matching "{filter}"
-                                </p>
+                    {active === 'my' && (
+                        <ul>
+                            {myFilteredPosts.length === 0 ? (
+                                isLoading ? (
+                                    <Loader />
+                                ) : filter ? (
+                                    <p className="pt-2 p-3 text-sm text-green-200">
+                                        No posts matching "{filter}"
+                                    </p>
+                                ) : (
+                                    <p className="pt-2 p-3 text-sm text-green-200">
+                                        You don't have any posts in "{themeFilter || 'All'}" yet!
+                                    </p>
+                                )
                             ) : (
-                                <p className="pt-2 p-3 text-sm text-green-200">
-                                    You don't have any posts in "{themeFilter || 'All'}" yet!
-                                </p>
-                            )
-                        ) : (
-                            myFilteredPosts.map((post) => (
-                                <li key={post.id}>
-                                    <PostCard
-                                        post={post}
-                                        isEditable={post.authorId === userId}
-                                        isEditing={editingPostId === post.id}
-                                        onStartEdit={() => handleStartEdit(post.id)}
-                                        onCancelEdit={handleCancelEdit}
-                                        onSave={handleSave}
-                                        onDelete={handleDelete}
-                                    />
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                )}
-            </div>
+                                myFilteredPosts.map((post) => (
+                                    <li key={post.id}>
+                                        <PostCard
+                                            post={post}
+                                            isEditable={post.authorId === userId}
+                                            isEditing={editingPostId === post.id}
+                                            onStartEdit={() => handleStartEdit(post.id)}
+                                            onCancelEdit={handleCancelEdit}
+                                            onSave={handleSave}
+                                            onDelete={handleDelete}
+                                        />
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    )}
+                </div></>
+
         </div>
     );
 }

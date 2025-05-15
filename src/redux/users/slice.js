@@ -13,6 +13,13 @@ const slice = createSlice({
             .addCase(fetchAllUsers.fulfilled, (state, action) => {
                 state.users = action.payload
             })
+            .addCase(fetchAllUsers.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(fetchAllUsers.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message || "Failed to add reaction";
+            });
     }
 })
 

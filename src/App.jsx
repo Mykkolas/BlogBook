@@ -4,6 +4,7 @@ import Loader from './components/Loader/Loader';
 import { PrivateRoute } from './components/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute';
 import './App.css'
+import { Toaster } from 'react-hot-toast';
 
 const Layout = lazy(() => import('./components/Layout/Layout'));
 const AuthLayout = lazy(() => import('./components/AuthLayout/AuthLayout'));
@@ -29,6 +30,7 @@ function App() {
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
+      <div><Toaster /></div>
     </Suspense>
   );
 }

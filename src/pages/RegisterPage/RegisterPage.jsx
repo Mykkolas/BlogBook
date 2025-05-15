@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { userRegister } from "../../redux/auth/operations";
 import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 const RegisterPage = () => {
     const dispatch = useDispatch()
     const validationSchema = Yup.object().shape({
@@ -21,8 +22,10 @@ const RegisterPage = () => {
         try {
             await dispatch(userRegister(values)).unwrap() // need to check if the name has been alredy taken (very important!!!)
             resetForm()
+            toast.success("Successfully registered!")
         }
         catch (err) {
+            toast.error(`${err}`)
             console.log(err);
         }
     }

@@ -10,6 +10,7 @@ import { fetchAllUsers } from "../../redux/users/operations";
 import { components } from 'react-select';
 import Select from "react-select";
 import axios from "axios";
+import toast from "react-hot-toast";
 const PostPage = () => {
     const dispatch = useDispatch()
     const validationSchema = Yup.object().shape({
@@ -104,6 +105,7 @@ const PostPage = () => {
                 images: uploadedUrls,
                 createdAt: new Date().toISOString()
             })).unwrap();
+            toast.success("Post has been created!")
             resetForm()
             navigate("/")
         }
@@ -237,7 +239,7 @@ const PostPage = () => {
                                 onChange={(e) => {
                                     let files = Array.from(e.currentTarget.files);
                                     if (files.length > 2) {
-                                        alert("You can upload only two photos. Extra files are ignored!");
+                                        toast.error("You can upload only two photos. Extra files are ignored!");
                                         files = files.slice(0, 2);
                                     }
                                     setFieldValue("images", files);

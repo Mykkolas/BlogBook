@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast"
 import PostsList from "../../components/PostsList/PostsList"
 const HomePage = () => {
 

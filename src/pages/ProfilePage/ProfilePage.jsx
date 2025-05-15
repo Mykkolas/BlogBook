@@ -9,6 +9,7 @@ import { selectUserID } from "../../redux/posts/selectors"
 import { fetchPosts, userUpdatePostsInfo } from "../../redux/posts/operations"
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal"
 import { UserIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
+import toast from "react-hot-toast"
 
 const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -18,14 +19,7 @@ const ProfilePage = () => {
     const userId = useSelector(selectUserID)
     const avatar = useSelector(selectUserAvatar)
     const dispatch = useDispatch()
-    const handleLogout = async () => {
-        try {
-            await dispatch(userLogout()).unwrap()
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
+
     const initialValues = {
         name: userName,
         email: userEmail
@@ -35,6 +29,16 @@ const ProfilePage = () => {
         email: Yup.string().email("Invalid email").min(3, "Too short").max(40, "Too long").required("Required"),
     })
 
+    const handleLogout = async () => {
+        try {
+            await dispatch(userLogout()).unwrap()
+            toast.success("Logged out!")
+        }
+        catch (err) {
+            toast.error("Failed to logout!")
+            console.log(err);
+        }
+    }
     const handleSubmit = async (values) => {
         try {
             /* console.log(values);
@@ -45,22 +49,35 @@ const ProfilePage = () => {
                 email: values.email
             })).unwrap()
             setIsEditing(false)
+            toast.success("User updated successfully!")
         }
         catch (err) {
             console.log(err);
+            toast.error("Failed to update user!")
         }
     }
     const handleUpdate = async () => {
-        await dispatch(userUpdatePostsInfo({ userId, avatar, userName }));
-        await dispatch(fetchPosts()); // only this combo  seems to resolve my issue
+        try {
+            await dispatch(userUpdatePostsInfo({ userId, avatar, userName })).unwrap();
+            await dispatch(fetchPosts()).unwrap();
+            toast.success("Posts are updated!")// only this combo  seems to resolve my issue
+        }
+        catch (err) {
+            console.log(err);
+            toast.error("Failed to update! Try again!")
+        }
     }
     const handleDelete = async () => {
         try {
             await dispatch(userDelete(userId)).unwrap()
             setShowConfirm(false)
+            toast("User deleted!", {
+                icon: '👤'
+            })
         }
         catch (err) {
             console.log(err);
+            toast.error("Failed to delete user! Try again!")
         }
 
     }

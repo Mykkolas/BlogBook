@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectUserID } from "../../redux/posts/selectors"
 import axios from "axios"
 import { userUploadAvatar } from "../../redux/auth/operations"
+import toast from "react-hot-toast"
 
 const AvatarUpload = () => {
     const dispatch = useDispatch()
@@ -20,10 +21,11 @@ const AvatarUpload = () => {
         try {
             const imageUrl = await uploadToCloudinary(values.imageFile);
             await dispatch(userUploadAvatar({ userId, avatar: imageUrl })).unwrap();
-            alert("Successful upload!")
+            toast.success("Uploaded avatar!")
             resetForm();
         } catch (err) {
-            console.error('Avatar upload failed:', err);
+            console.log(err);
+            toast.error('Avatar upload failed!');
         }
     }
     const handleValidation = (values) => {
