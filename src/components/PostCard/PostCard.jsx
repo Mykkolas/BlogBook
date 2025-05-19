@@ -10,6 +10,8 @@ import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectUserID } from "../../redux/posts/selectors";
 import PhotoViewerModal from "../PhotoModal/PhotoModal";
 import toast from "react-hot-toast";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditing, onDelete }) => {
     const [showConfirm, setShowConfirm] = useState(false);
     const dispatch = useDispatch()
@@ -54,8 +56,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         body: Yup.string().min(5, "Too short").max(500, "Too long").required("Required"),
     });
     return (
-        <div className="pb-3 ">
-            <div className=" mt-5 relative  bg-white p-4 rounded-md ">
+        <div className="pb-3">
+            <div className="mt-5 relative border-3 border-green-800  bg-white p-4 rounded-md ">
                 <div className="flex">
                     {post.authorAvatar.startsWith("https") ? (
                         <img
@@ -181,7 +183,91 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </p>
                     )
                 }
-                <p className="absolute bottom-1.5 text-sm  text-black right-1.5">{post.theme}</p>
+                <p className="absolute bottom-1 right-[-40px] w-[150px] h-[80px]">
+                    {(() => {
+                        switch (post.theme) {
+                            case 'Crypto':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/7955af3f-f4b9-4745-b314-22f7a36acdc3/BwHPS9dtRc.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'Travel':
+                                return (
+                                    /*  <DotLottieReact
+                                         className="w-[110px] mt-5 "
+                                         src="https://lottie.host/5d76cc1b-71ee-4ff3-b10c-1c0c3f4595bc/oc0J7Kc7z4.lottie"
+                                         loop
+                                         autoplay
+                                     /> */ // maybe for other section
+                                    <p></p>
+                                );
+                            case 'technology':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'politics':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'health':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'music':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'lifestyle':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'sport':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+                            case 'other':
+                                return (
+                                    <DotLottieReact
+                                        src="https://lottie.host/technology.lottie"
+                                        loop
+                                        autoplay
+                                    />
+                                );
+
+                            default:
+                                return null; // or a fallback SVG / animation
+                        }
+                    })()}
+                </p>
+
+
                 {
                     post.images.length > 0 && (
                         <div className="flex gap-2 pl-15 pt-2 pb-2">

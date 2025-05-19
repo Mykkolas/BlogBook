@@ -25,6 +25,15 @@ const PostsList = () => {
             setEditingPostId(null) // fixed: user could still edit without being logged in
         }
     }, [isLoggedIn])
+    const theme = useSelector(selectThemeFilter)
+    useEffect(() => {
+        const container = document.getElementById("top");
+        if (container) {
+            container.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+    }, [theme]);
+
     const navigate = useNavigate();
     const userId = useSelector(selectUserID)
     const filter = useSelector(selectPostsFilter)
@@ -33,6 +42,32 @@ const PostsList = () => {
     const themeFilter = useSelector(selectThemeFilter)
     const handleStartEdit = (id) => setEditingPostId(id)
     const handleCancelEdit = () => setEditingPostId(null)
+
+    const getThemeDescription = (theme) => {
+        switch (theme) {
+            case "Crypto":
+                return "Dive into the decentralized world of cryptocurrency. From Bitcoin to smart contracts and Web3 innovation, our community explores the tech that's reshaping finance and digital ownership. Stay ahead of the curve and connect with like-minded crypto enthusiasts.";
+            case "Technology":
+                return "Explore the cutting edge of innovation. From AI and robotics to software and hardware, our technology community keeps you informed on what’s next.";
+            case "Travel":
+                return "Embark on journeys near and far. Share travel stories, discover hidden gems, and get tips from experienced globetrotters.";
+            case "Politics":
+                return "Engage in meaningful discussions about global and local politics. Analyze policies, leadership, and the events shaping our world.";
+            case "Sport":
+                return "Stay in the game with discussions on your favorite sports, athletes, matches, and everything happening on and off the field.";
+            case "Lifestyle":
+                return "Discuss habits, wellness, fashion, and all the elements that shape modern lifestyles. A place to share and grow.";
+            case "Music":
+                return "Tune into conversations about genres, artists, albums, and the impact of music on culture and society.";
+            case "Health":
+                return "Focus on physical and mental wellness, fitness routines, nutrition advice, and breakthroughs in medical science.";
+            case "Other":
+                return "Explore unique topics and offbeat conversations that don’t quite fit anywhere else — but still spark curiosity.";
+            case "All":
+            default:
+                return "Browse conversations from every community — from tech to lifestyle, politics to sports — all in one unified feed.";
+        }
+    };
 
     const handleSave = async (updatedPost) => {
         try {
@@ -62,12 +97,13 @@ const PostsList = () => {
     }
 
     return (
-        <div className="flex flex-col md:flex-row gap-6 w-full ">
+        <div className="flex flex-col  md:flex-row gap-6 w-full ">
+            <div id="top" className="overflow-auto h-screen scroll-smooth"></div>
             {/* Left Sidebar */}
-            <div className="md:w-1/3 flex-1 space-y-4 lg:mt-5">
+            <div className="md:w-1/3    flex-1 space-y-4 lg:mt-5">
                 {/* Theme Filter Buttons */}
                 <SearchBox />
-                <div className="flex flex-wrap gap-2 p-2 rounded-lg glass">
+                <div className=" md:sticky top-17 flex flex-wrap gap-2 p-2 rounded-lg glass">
                     < button
                         onClick={() => dispatch(changeThemeFilter(''))}
                         className={`px-3 py-1 border items-center flex transition rounded-md ${themeFilter === '' ? 'bg-green-500  text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
@@ -173,7 +209,7 @@ const PostsList = () => {
                 </div>
 
                 {/* Post Filter Buttons + New Post Button */}
-                <div className="flex  justify-around gap-2 glass p-3 rounded-lg">
+                <div className="flex md:sticky lg:top-42 top-52  justify-around gap-2 glass p-3 rounded-lg">
                     <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive('all')}
@@ -219,6 +255,15 @@ const PostsList = () => {
 
 
                 </div>
+                <div className="glass md:sticky lg:top-64 top-74  p-4 rounded-lg flex flex-col ">
+                    <h2 className="text-xl font-semibold mb-2 text-green-200">
+                        {theme} {theme !== "Other" ? "Community" : ""}
+                    </h2>
+                    <p className="text-sm text-gray-200">
+                        {getThemeDescription(theme)}
+                    </p>
+                </div>
+
             </div>
             <>
                 {/* Right Column — Posts */}
