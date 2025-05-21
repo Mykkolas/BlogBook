@@ -26,13 +26,13 @@ const PostsList = () => {
         }
     }, [isLoggedIn])
     const theme = useSelector(selectThemeFilter)
-    useEffect(() => {
-        const container = document.getElementById("top");
-        if (container) {
-            container.scrollTo({ top: 0, behavior: "smooth" });
-        }
-
-    }, [theme]);
+    /*  useEffect(() => {
+         const container = document.getElementById("top");
+         if (container) {
+             container.scrollTo({ top: 0, behavior: "smooth" });
+         }
+ 
+     }, [theme]); */
 
     const navigate = useNavigate();
     const userId = useSelector(selectUserID)
@@ -97,10 +97,10 @@ const PostsList = () => {
     }
 
     return (
-        <div className="flex flex-col  md:flex-row gap-6 w-full ">
-            <div id="top" className="overflow-auto h-screen scroll-smooth"></div>
+        <div className="flex flex-col  md:flex-row md:space-x-6 w-full ">
+            <div id="top" className="hidden md:block overflow-auto h-screen scroll-smooth"></div>
             {/* Left Sidebar */}
-            <div className="md:w-1/3    flex-1 space-y-4 lg:mt-5">
+            <div className="md:w-1/3   flex-1 space-y-4 lg:mt-5">
                 {/* Theme Filter Buttons */}
                 <SearchBox />
                 <div className=" md:sticky top-17 flex flex-wrap gap-2 p-2 rounded-lg glass">
@@ -209,7 +209,7 @@ const PostsList = () => {
                 </div>
 
                 {/* Post Filter Buttons + New Post Button */}
-                <div className="flex md:sticky lg:top-42 top-52  justify-around gap-2 glass p-3 rounded-lg">
+                <div className="flex md:sticky lg:top-42 top-62  justify-around gap-2 glass p-3 rounded-lg">
                     <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive('all')}
@@ -255,7 +255,7 @@ const PostsList = () => {
 
 
                 </div>
-                <div className="glass md:sticky lg:top-64 top-74  p-4 rounded-lg flex flex-col ">
+                <div className="glass md:sticky lg:top-64 top-84  p-4 rounded-lg flex flex-col ">
                     <h2 className="text-xl font-semibold mb-2 text-green-200">
                         {theme} {theme !== "Other" ? "Community" : ""}
                     </h2>
@@ -267,20 +267,25 @@ const PostsList = () => {
             </div>
             <>
                 {/* Right Column — Posts */}
-                <div className="lg:w-2/3 flex-1">
+                <div className=" lg:w-2/3 flex-1 overflow-x-hidden">
                     {active === 'all' && (
                         <ul>
                             {filteredPosts.length === 0 ? (
                                 isLoading ? (
                                     <Loader />
                                 ) : filter ? (
-                                    <p className="pt-2 p-3 text-sm text-green-200">
-                                        No posts matching "{filter}"
-                                    </p>
+                                    <div className="md:mt-14 mt-5 w-80">
+                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                            No posts matching "{filter}"
+                                        </p>
+                                    </div>
+
                                 ) : (
-                                    <p className="pt-2 p-3 text-sm text-green-200">
-                                        No posts to show. Be the first to post!
-                                    </p>
+                                    <div className="md:mt-14 mt-5 w-80">
+                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                            No posts to show. Be the first to post!
+                                        </p>
+                                    </div>
                                 )
                             ) : (
                                 filteredPosts.map((post) => (
@@ -306,13 +311,17 @@ const PostsList = () => {
                                 isLoading ? (
                                     <Loader />
                                 ) : filter ? (
-                                    <p className="pt-2 p-3 text-sm text-green-200">
-                                        No posts matching "{filter}"
-                                    </p>
+                                    <div className="md:mt-14 mt-5 w-80">
+                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                            No posts matching "{filter}"
+                                        </p>
+                                    </div>
                                 ) : (
-                                    <p className="pt-2 p-3 text-sm text-green-200">
-                                        You don't have any posts in "{themeFilter || 'All'}" yet!
-                                    </p>
+                                    <div className="md:mt-14 mt-5 w-80">
+                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                            You don't have any posts in "{themeFilter || 'All'}" yet!
+                                        </p>
+                                    </div>
                                 )
                             ) : (
                                 myFilteredPosts.map((post) => (

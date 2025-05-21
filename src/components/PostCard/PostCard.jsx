@@ -84,7 +84,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </div>
                     )}
                     <div className="pl-3 flex-row">
-                        <p className="text-xl text-black">{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
+                        <p className="text-xl  text-black">{getHighlightedText(post.authorName, filter, s.authorHighlight)}</p>
                         <p className="text-gray-500  text-sm flex items-center gap-1 ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
                                 <path d="M5.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H6a.75.75 0 0 1-.75-.75V12ZM6 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H6ZM7.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H8a.75.75 0 0 1-.75-.75V12ZM8 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H8ZM9.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V10ZM10 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H10ZM9.25 14a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V14ZM12 9.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V10a.75.75 0 0 0-.75-.75H12ZM11.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H12a.75.75 0 0 1-.75-.75V12ZM12 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H12ZM13.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H14a.75.75 0 0 1-.75-.75V10ZM14 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H14Z" />
@@ -110,8 +110,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
                 {!isEditing ?
                     <div>
-                        <p className="pl-15 text-xl font-medium text-black">{getHighlightedText(post.title, filter)}</p>
-                        <p className="pl-15 text-black">{getHighlightedText(post.body, filter)}</p>
+                        <p className="pl-15 text-2xl font- text-gray-900">{getHighlightedText(post.title, filter)}</p>
+                        <p className="pl-15 text-gray-500">{getHighlightedText(post.body, filter)}</p>
                     </div>
                     :
                     <div className="bg-gray-50 ml-15 border border-gray-200 rounded-lg p-4 mt-4 mb-4 ">
@@ -276,7 +276,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                     key={index}
                                     src={imageFile}
                                     alt={`uploaded-${index}`}
-                                    className="w-[100px] h-[100px] md:w-[120px] md:h-[150px] lg:w-[200px] lg:h-[200px] rounded-[10px] border border-black  cursor-pointer hover:opacity-90 transition"
+                                    className="w-[100px] h-[100px] md:w-[120px] md:h-[150px] lg:w-[200px] lg:h-[200px] rounded-[10px] cursor-pointer hover:opacity-90 transition"
                                     onClick={() => showPhotos(index)}
                                 />
                             ))}
