@@ -20,8 +20,8 @@ const PostPage = () => {
         taggedUsers: Yup.array().of(Yup.string()),
         images: Yup.mixed()
             .test("fileCount", "You can upload up to 2 images", value => value && value.length <= 2)
-            .test("fileSize", "Each image must be under 3MB", value =>
-                value ? value.every(file => file.size <= 3 * 1024 * 1024) : true
+            .test("fileSize", "Each image must be under 4MB", value =>
+                value ? value.every(file => file.size <= 4 * 1024 * 1024) : true
             )
     })
 
