@@ -209,7 +209,7 @@ const PostsList = () => {
                 </div>
 
                 {/* Post Filter Buttons + New Post Button */}
-                <div className="flex md:sticky lg:top-42 top-62  justify-around gap-2 glass p-3 rounded-lg">
+                <div className="flex md:sticky lg:top-42 top-52  justify-around gap-2 glass p-3 rounded-lg">
                     <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive('all')}
@@ -255,7 +255,7 @@ const PostsList = () => {
 
 
                 </div>
-                <div className="glass md:sticky lg:top-64 top-84  p-4 rounded-lg flex flex-col ">
+                <div className="glass md:sticky lg:top-64 top-74  p-4 rounded-lg flex flex-col ">
                     <h2 className="text-xl font-semibold mb-2 text-green-200">
                         {theme} {theme !== "Other" ? "Community" : ""}
                     </h2>

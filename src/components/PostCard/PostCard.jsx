@@ -57,7 +57,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
     });
     return (
         <div className="pb-3">
-            <div className="mt-5 relative border-3 border-green-800  bg-white p-4 rounded-md ">
+            <div
+                className="mt-5 relative border-3 border-green-800  bg-white p-4 rounded-xl shadow-green-900 shadow-md ">
                 <div className="flex">
                     {post.authorAvatar.startsWith("https") ? (
                         <img
@@ -183,7 +184,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </p>
                     )
                 }
-                <p className="absolute bottom-1 right-[-40px] w-[150px] h-[80px]">
+                <p className="absolute bottom-[-10px] left-[-50px] w-[150px] p-3 h-[80px] z-1">
                     {(() => {
                         switch (post.theme) {
                             case 'Crypto':
@@ -308,9 +309,9 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 }
 
 
-                <div className="mt-3">
+                <div className="mt-4">
                     {isLoggedIn ? (
-                        <div className="flex items-center gap-4 text-gray-600 text-sm pl-14">
+                        <div className="flex items-center gap-4 text-gray-600 text-sm pl-20 z-20">
                             <button
                                 disabled={currentReaction === "like"}
                                 onClick={() => dispatch(addReactionToPost({ post, reaction: "like", userId }))}

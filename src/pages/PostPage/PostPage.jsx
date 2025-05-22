@@ -24,6 +24,16 @@ const PostPage = () => {
                 value ? value.every(file => file.size <= 3 * 1024 * 1024) : true
             )
     })
+
+    const truncateFileName = (name, maxLength = 20) => {
+        if (name.length <= maxLength) return name;
+
+        const ext = name.substring(name.lastIndexOf('.'));
+        const base = name.substring(0, maxLength - ext.length - 3); // leave space for ellipsis
+        return `${base}...${ext}`;
+    };
+
+
     const navigate = useNavigate()
     const currentUsername = useSelector(selectUserName);
     const allUsers = useSelector(selectAllUsers);
@@ -248,17 +258,28 @@ const PostPage = () => {
                             <ErrorMessage name="images" component="div" className="text-red-600 text-sm  absolute" />
 
                             {values.images && values.images.length > 0 && (
-                                <div className="flex gap-4 mt-4">
-                                    {values.images.map((file, index) => (
-                                        <img
-                                            key={index}
-                                            src={URL.createObjectURL(file)}
-                                            alt={`preview-${index}`}
-                                            className="w-36 h-36 object-cover rounded-md shadow"
-                                        />
-                                    ))}
+                                <div className="mt-4 space-y-2">
+                                    <div className="flex gap-4 flex-wrap">
+                                        {values.images.map((file, index) => (
+                                            <img
+                                                key={index}
+                                                src={URL.createObjectURL(file)}
+                                                alt={`preview-${index}`}
+                                                className="w-36 h-36 object-cover rounded-md shadow"
+                                            />
+                                        ))}
+                                    </div>
+                                    <ul className="text-sm text-gray-700 list-disc list-inside">
+                                        {values.images.map((file, index) => (
+                                            <li key={index}>
+                                                {truncateFileName(file.name)}
+                                            </li>
+                                        ))}
+                                    </ul>
+
                                 </div>
                             )}
+
                         </div>
 
                         {/* Theme */}
