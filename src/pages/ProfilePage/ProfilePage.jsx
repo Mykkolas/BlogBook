@@ -33,7 +33,9 @@ const ProfilePage = () => {
     const handleLogout = async () => {
         try {
             await dispatch(userLogout()).unwrap()
-            toast.success("Logged out!")
+            toast.success("Logged out!", {
+                position: "top-left"
+            })
         }
         catch (err) {
             toast.error("Failed to logout!")

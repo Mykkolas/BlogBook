@@ -14,7 +14,7 @@ const SearchBox = () => {
 
 
     return (
-        <div className="pr-30 md:sticky top-4 ">
+        <div className="pr-30 md:sticky md:top-4 ">
             <label className="relative w-full max-w-sm " >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-300 z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">

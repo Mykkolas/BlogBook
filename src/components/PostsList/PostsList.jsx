@@ -209,7 +209,7 @@ const PostsList = () => {
                 </div>
 
                 {/* Post Filter Buttons + New Post Button */}
-                <div className="flex md:sticky lg:top-42 top-52  justify-around gap-2 glass p-3 rounded-lg">
+                <div className="flex md:sticky lg:top-42 md:top-62  justify-around gap-2 glass p-3 rounded-lg">
                     <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive('all')}
@@ -238,7 +238,7 @@ const PostsList = () => {
                         </button>
                         <button
                             className="btn  text-white font-extrabold bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 
-             animate-gradient-x border-0 md:w-30 lg:w-60 shadow-md transition duration-300 ml-5"
+             animate-gradient-x border-0 md:w-27 lg:w-60 shadow-md transition duration-300 ml-5"
                             onClick={() => {
                                 if (!isLoggedIn) {
                                     toast.error("Login to post!")
@@ -255,7 +255,7 @@ const PostsList = () => {
 
 
                 </div>
-                <div className="glass md:sticky lg:top-64 top-74  p-4 rounded-lg flex flex-col ">
+                <div className="glass md:sticky lg:top-64 md:top-84  p-4 rounded-lg flex flex-col ">
                     <h2 className="text-xl font-semibold mb-2 text-green-200">
                         {theme} {theme !== "Other" ? "Community" : ""}
                     </h2>

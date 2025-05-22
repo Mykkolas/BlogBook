@@ -193,6 +193,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         src="https://lottie.host/7955af3f-f4b9-4745-b314-22f7a36acdc3/BwHPS9dtRc.lottie"
                                         loop
                                         autoplay
+                                        speed={0.5}
                                     />
                                 );
                             case 'Travel':
@@ -221,19 +222,23 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         autoplay
                                     />
                                 );
-                            case 'health':
+                            case 'Health':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
+                                        src="https://lottie.host/f99a51e1-ab76-4f96-b4aa-cac883e6b868/zIU6h1fkjr.lottie"
                                         loop
                                         autoplay
+                                        className="w-[200px] absolute left-[-15px] top-[-5px]"
+                                        speed={0.3}
                                     />
                                 );
-                            case 'music':
+                            case 'Music':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
+                                        src="https://lottie.host/bafcf29c-cc04-489f-a2d9-02dbfe23a7e9/yuVJ7Tg7Mp.lottie"
                                         loop
+                                        className="ml-5"
+                                        speed={0.3}
                                         autoplay
                                     />
                                 );

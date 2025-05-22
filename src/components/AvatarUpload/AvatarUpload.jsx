@@ -61,6 +61,7 @@ const AvatarUpload = () => {
             <Formik
                 initialValues={{ imageFile: null }}
                 validate={handleValidation}
+                validateOnChange={true}
                 onSubmit={handleSubmit}>
                 {({ setFieldValue, isSubmitting, isValid, setTouched }) => (
                     <Form>
@@ -88,6 +89,9 @@ const AvatarUpload = () => {
                                             setFieldValue("imageFile", file);
                                             setTouched({ imageFile: true });
                                             setSelectedFileName(file.name);
+                                            setTimeout(() => {
+                                                document.activeElement.blur(); // trigger validation visually too
+                                            }, 0);
                                         }
                                     }}
                                 />
