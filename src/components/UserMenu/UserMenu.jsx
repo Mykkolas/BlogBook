@@ -10,10 +10,10 @@ const UserMenu = () => {
     return (
         <div>
             <NavLink to="/profile">
-                <div>
+                <div className="active:scale-85 transition">
                     {user.avatar.startsWith("https") ? (
                         <img
-                            style={{ width: 70, height: 70, borderRadius: "50%" }}
+                            style={{ width: 60, height: 60, borderRadius: "50%", border: "2px solid green" }}
                             src={user.avatar}
                             alt={`${user.name}'s avatar`}
                         />

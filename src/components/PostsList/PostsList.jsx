@@ -97,7 +97,7 @@ const PostsList = () => {
     }
 
     return (
-        <div className="flex flex-col  md:flex-row md:space-x-6 w-full ">
+        <div className="flex flex-col  md:flex-row gap-2 w-full ">
             <div id="top" className="hidden md:block overflow-auto h-screen scroll-smooth"></div>
             {/* Left Sidebar */}
             <div className="md:w-1/3   flex-1 space-y-4 lg:mt-5">
@@ -267,7 +267,7 @@ const PostsList = () => {
             </div>
             <>
                 {/* Right Column — Posts */}
-                <div className=" lg:w-2/3 flex-1 overflow-x-hidden">
+                <div className=" lg:w-2/3 md:ml-5 flex-1 overflow-x-hidden">
                     {active === 'all' && (
                         <ul>
                             {filteredPosts.length === 0 ? (

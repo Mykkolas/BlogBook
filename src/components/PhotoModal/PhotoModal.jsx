@@ -4,6 +4,8 @@ const PhotoViewerModal = ({ images, initialIndex = 0, onClose }) => {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
     const touchStartX = useRef(null);
     const touchEndX = useRef(null);
+    const mouseDownX = useRef(null);
+    const mouseUpX = useRef(null);
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -20,6 +22,7 @@ const PhotoViewerModal = ({ images, initialIndex = 0, onClose }) => {
     const next = () => setCurrentIndex((prev) => (prev + 1) % images.length);
     const prev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
+    // Touch Handlers
     const handleTouchStart = (e) => {
         touchStartX.current = e.touches[0].clientX;
     };
@@ -39,29 +42,47 @@ const PhotoViewerModal = ({ images, initialIndex = 0, onClose }) => {
         touchEndX.current = null;
     };
 
+    // Mouse Handlers
+    const handleMouseDown = (e) => {
+        mouseDownX.current = e.clientX;
+    };
+
+    const handleMouseUp = (e) => {
+        mouseUpX.current = e.clientX;
+        if (mouseDownX.current !== null && mouseUpX.current !== null) {
+            const deltaX = mouseDownX.current - mouseUpX.current;
+            if (Math.abs(deltaX) > 50) {
+                deltaX > 0 ? next() : prev();
+            }
+        }
+        mouseDownX.current = null;
+        mouseUpX.current = null;
+    };
+
     return (
         <div
-            className="fixed  inset-0 z-60 backdrop-blur-2xl bg-black/70 flex items-center justify-center"
+            className="fixed inset-0 z-60 backdrop-blur-2xl bg-black/70 flex items-center justify-center"
             onClick={onClose}
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="w-full flex justify-center items-center max-w-3xl mx-5  "
+                className="w-full flex justify-center items-center max-w-3xl mx-5"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
             >
                 <img
                     src={images[currentIndex]}
                     alt={`photo-${currentIndex}`}
-                    className="max-h-[90vh]   rounded-md object-contain select-none"
+                    className="max-h-[90vh] rounded-md object-contain select-none"
                     draggable={false}
                 />
                 <button className='absolute md:top-10 md:right-10 top-2 right-2' onClick={() => onClose()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="red" className="md:size-10 size-8">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
-
                 </button>
 
                 {/* Nav Arrows - only show on md+ screens */}

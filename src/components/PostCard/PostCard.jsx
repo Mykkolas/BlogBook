@@ -32,6 +32,13 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
         setViewerOpen(true);
     };
 
+    const [clickedReaction, setClickedReaction] = useState(null);
+
+    const handleReactionClick = (reaction) => {
+        setClickedReaction(reaction);
+        dispatch(addReactionToPost({ post, reaction, userId }));
+        setTimeout(() => setClickedReaction(null), 500);
+    };
 
     const getHighlightedText = (text, highlight, style = s.highlight) => {
         if (!highlight) return text;
@@ -250,12 +257,13 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         autoplay
                                     />
                                 );
-                            case 'sport':
+                            case 'Sport':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
-                                        loop
+                                        src="https://lottie.host/4fcbbb58-d0fc-4339-bd7a-7cdd6812820a/nwFDnNRDR7.lottie"
                                         autoplay
+                                        speed={0.3}
+                                        className="w-[150px] h-[80px] absolute left-5 bottom-1 "
                                     />
                                 );
                             case 'other':
@@ -316,30 +324,35 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
 
                 <div className="mt-4">
                     {isLoggedIn ? (
-                        <div className="flex items-center gap-4 text-gray-600 text-sm pl-20 z-20">
+                        <div className="flex items-center gap-4   text-gray-600 text-sm pl-20 ">
                             <button
                                 disabled={currentReaction === "like"}
-                                onClick={() => dispatch(addReactionToPost({ post, reaction: "like", userId }))}
-                                className={`flex items-center gap-1 hover:text-blue-600 transition ${currentReaction === "like" ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
+                                onClick={() => handleReactionClick("like")}
+                                className={`flex items-center gap-1 hover:scale-110 hover:text-blue-600 transition 
+        ${currentReaction === "like" ? "opacity-50 cursor-not-allowed" : ""}
+        ${clickedReaction === "like" ? "animate-pop" : ""}`}
                             >
                                 👍 {post.reactions?.like || 0}
                             </button>
 
+
                             <button
                                 disabled={currentReaction === "love"}
-                                onClick={() => dispatch(addReactionToPost({ post, reaction: "love", userId }))}
-                                className={`flex items-center gap-1 hover:text-pink-600 transition ${currentReaction === "love" ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
+                                onClick={() => handleReactionClick("love")}
+                                className={`flex items-center gap-1 hover:text-pink-600 hover:scale-110 transition
+                                     ${currentReaction === "love" ? "opacity-50 cursor-not-allowed" : ""
+                                    }
+                                    ${clickedReaction === "love" ? "animate-pop" : ""}`}
                             >
                                 ❤️ {post.reactions?.love || 0}
                             </button>
 
                             <button
                                 disabled={currentReaction === "laugh"}
-                                onClick={() => dispatch(addReactionToPost({ post, reaction: "laugh", userId }))}
-                                className={`flex items-center gap-1 hover:text-yellow-500 transition ${currentReaction === "laugh" ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
+                                onClick={() => handleReactionClick("laugh")}
+                                className={`flex items-center gap-1 hover:text-yellow-500 hover:scale-110 transition ${currentReaction === "laugh" ? "opacity-50 cursor-not-allowed" : ""
+                                    }
+                                    ${clickedReaction === "laugh" ? "animate-pop" : ""}`}
                             >
                                 😂 {post.reactions?.laugh || 0}
                             </button>
@@ -351,6 +364,8 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                             <p onClick={() => toast.error("Log in to react with 😂")}>😂 {post.reactions?.laugh || 0}</p>
                         </div>
                     )}
+                    <span className="text-xs absolute top-1 right-2">{post.theme}</span>
+
                 </div>
 
             </div >
