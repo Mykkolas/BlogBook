@@ -211,7 +211,14 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                          loop
                                          autoplay
                                      /> */ // maybe for other section
-                                    <p></p>
+                                    <DotLottieReact
+                                        src="https://lottie.host/7925ee54-1bab-4aee-bfbe-cb240749b9ed/xUaOY2gMkx.lottie"
+                                        loop
+                                        className="w-[130px] absolute left-4 top-0"
+
+                                        autoplay
+                                        speed={0.4}
+                                    />
                                 );
                             case 'technology':
                                 return (
@@ -221,12 +228,14 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         autoplay
                                     />
                                 );
-                            case 'politics':
+                            case 'Politics':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
+                                        src="https://lottie.host/5eb528a7-a596-4fbb-b847-ffdcd14a57c5/IlyTi1Aaxb.lottie"
                                         loop
                                         autoplay
+                                        className="w-[120px] absolute left-6 top-1"
+                                        speed={0.7}
                                     />
                                 );
                             case 'Health':
@@ -249,12 +258,14 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         autoplay
                                     />
                                 );
-                            case 'lifestyle':
+                            case 'Lifestyle':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
+                                        src="https://lottie.host/64f85fa8-0b50-45a8-ac45-0350f0f50e9b/v30Nm5y8Fe.lottie"
                                         loop
                                         autoplay
+                                        speed={0.5}
+                                        className="w-[130px]  absolute left-4 bottom-3  "
                                     />
                                 );
                             case 'Sport':
@@ -266,17 +277,19 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                                         className="w-[150px] h-[80px] absolute left-5 bottom-1 "
                                     />
                                 );
-                            case 'other':
+                            case 'Other':
                                 return (
                                     <DotLottieReact
-                                        src="https://lottie.host/technology.lottie"
-                                        loop
+                                        src="https://lottie.host/01b7f571-ffda-453c-9845-1704100171e5/h55p9vszo6.lottie"
                                         autoplay
+                                        className="w-[145px]  absolute left-2 bottom-3 "
+
+                                        speed={0.4}
                                     />
                                 );
 
                             default:
-                                return null; // or a fallback SVG / animation
+                                return null;
                         }
                     })()}
                 </p>
@@ -322,13 +335,13 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                 }
 
 
-                <div className="mt-4">
+                <div className="mt-4 ">
                     {isLoggedIn ? (
                         <div className="flex items-center gap-4   text-gray-600 text-sm pl-20 ">
                             <button
                                 disabled={currentReaction === "like"}
                                 onClick={() => handleReactionClick("like")}
-                                className={`flex items-center gap-1 hover:scale-110 hover:text-blue-600 transition 
+                                className={`z-50 flex items-center gap-1 hover:scale-110 hover:text-blue-600 transition 
         ${currentReaction === "like" ? "opacity-50 cursor-not-allowed" : ""}
         ${clickedReaction === "like" ? "animate-pop" : ""}`}
                             >

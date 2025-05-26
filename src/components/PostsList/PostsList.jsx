@@ -17,6 +17,7 @@ const PostsList = () => {
     const dispatch = useDispatch()
     const [active, setActive] = useState("all")
     const [editingPostId, setEditingPostId] = useState(null)
+
     useEffect(() => {
         dispatch(fetchPosts())
     }, [dispatch])
