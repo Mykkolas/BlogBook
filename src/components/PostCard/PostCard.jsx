@@ -341,7 +341,7 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                             <button
                                 disabled={currentReaction === "like"}
                                 onClick={() => handleReactionClick("like")}
-                                className={`z-50 flex items-center gap-1 hover:scale-110 hover:text-blue-600 transition 
+                                className={`z-20 flex items-center gap-1 hover:scale-110 hover:text-blue-600 transition 
         ${currentReaction === "like" ? "opacity-50 cursor-not-allowed" : ""}
         ${clickedReaction === "like" ? "animate-pop" : ""}`}
                             >
