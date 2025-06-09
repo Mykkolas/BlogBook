@@ -372,12 +372,12 @@ const PostCard = ({ post, isEditable, onSave, onStartEdit, onCancelEdit, isEditi
                         </div>
                     ) : (
                         <div className="flex items-center gap-4 text-gray-500 text-sm pl-14">
-                            <p onClick={() => toast.error("Log in to react with 👍")}>👍 {post.reactions?.like || 0}</p>
+                            <p className="z-20" onClick={() => toast.error("Log in to react with 👍")}>👍 {post.reactions?.like || 0}</p>
                             <p onClick={() => toast.error("Log in to react with ❤️")}>❤️ {post.reactions?.love || 0}</p>
                             <p onClick={() => toast.error("Log in to react with 😂")}>😂 {post.reactions?.laugh || 0}</p>
                         </div>
                     )}
-                    <span className="text-xs absolute top-1 right-2">{post.theme}</span>
+                    {/*     <span className="text-xs absolute top-1 right-2 bg-green-300 ">{post.theme}</span> */}
 
                 </div>
 

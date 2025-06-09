@@ -29,13 +29,33 @@ const LoginPage = () => {
     }
 
     return (
-        <div className=" min-h-screen p-5 md:p-0  flex items-center justify-center">
+
+
+
+        <div className=" min-h-screen p-5 md:p-0 flex  items-center justify-center">
+
+
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border border-gray-200">
                 {/* Logo / Return */}
-                <div className="mb-6 text-center">
-                    <NavLink to="/" className="text-black hover:underline font-medium">
-                        BLOGBOOK
+                <div className="mb-8 flex flex-col items-center text-center">
+                    <NavLink
+                        to="/"
+                        className="flex items-center gap-3 text-gray-900 hover:underline font-semibold"
+                    >
+                        <span className="text-2xl tracking-tight">BLOGB</span>
+
+                        <div className="relative w-12 h-12">
+                            <div className="absolute inset-0 rounded-full border-2 border-green-400 ring-glow z-[1]"></div>
+                            <img
+                                src="/vite.svg"
+                                alt="Blogbook logo"
+                                className="w-full h-full rounded-full object-contain shadow-md"
+                            />
+                        </div>
+
+                        <span className="text-2xl tracking-tight">OK</span>
                     </NavLink>
+
                 </div>
 
                 {/* Formik Form */}
@@ -92,7 +112,9 @@ const LoginPage = () => {
                             >
                                 Login
                             </button>
-                            <NavLink to="/register">Not registered?</NavLink>
+                            <NavLink to="/register">
+                                <p className="underline text-sm">Not registered?</p>
+                            </NavLink>
                         </Form>
                     )}
                 </Formik>

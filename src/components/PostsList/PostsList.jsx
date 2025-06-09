@@ -214,7 +214,7 @@ const PostsList = () => {
                     <div className="bg-green-500 p-1 flex gap-2 rounded-lg">
                         <button
                             onClick={() => setActive('all')}
-                            className={`btn px-4 py-1 transition font-medium border shadow-none ${active === 'all'
+                            className={`btn px-2 md:px-4 py-1 transition font-medium border shadow-none ${active === 'all'
                                 ? 'bg-green-600 text-white'
                                 : 'bg-green-500 text-gray-700 border-gray-300 hover:bg-green-400'
                                 }`}
@@ -230,7 +230,7 @@ const PostsList = () => {
                                 console.log("Logged in")
                                 setActive('my')
                             }}
-                            className={`btn px-4 py-1 transition font-medium border shadow-none ${active === 'my'
+                            className={`btn px-2 md:px-4 py-1 transition font-medium border shadow-none ${active === 'my'
                                 ? 'bg-green-600 text-white'
                                 : 'bg-green-500 text-gray-700 border-gray-300 hover:bg-green-400'
                                 }`}
@@ -238,8 +238,8 @@ const PostsList = () => {
                             My posts
                         </button>
                         <button
-                            className="btn  text-white font-extrabold bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 
-             animate-gradient-x border-0 md:w-27 lg:w-60 shadow-md transition duration-300 ml-5"
+                            className="btn px-2 md:px-4 text-white font-extrabold bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 
+             animate-gradient-x border-0  md:w-27 lg:w-60 shadow-md transition duration-300 ml-5"
                             onClick={() => {
                                 if (!isLoggedIn) {
                                     toast.error("Login to post!")
@@ -275,15 +275,15 @@ const PostsList = () => {
                                 isLoading ? (
                                     <Loader />
                                 ) : filter ? (
-                                    <div className="md:mt-14 mt-5 w-80">
-                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                    <div className="md:mt-14 mt-5  w-max">
+                                        <p className=" rounded-xl  glass p-3  md:text-md text-sm text-white">
                                             No posts matching "{filter}"
                                         </p>
                                     </div>
 
                                 ) : (
-                                    <div className="md:mt-14 mt-5 w-80">
-                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                    <div className="md:mt-14 mt-5  w-max ">
+                                        <p className=" rounded-xl  glass p-3 md:text-md text-sm text-white">
                                             No posts to show. Be the first to post!
                                         </p>
                                     </div>
@@ -312,14 +312,14 @@ const PostsList = () => {
                                 isLoading ? (
                                     <Loader />
                                 ) : filter ? (
-                                    <div className="md:mt-14 mt-5 w-80">
-                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                    <div className="md:mt-14 mt-5 w-max">
+                                        <p className="rounded-xl  glass p-3 md:text-md text-sm text-white">
                                             No posts matching "{filter}"
                                         </p>
                                     </div>
                                 ) : (
-                                    <div className="md:mt-14 mt-5 w-80">
-                                        <p className="pt-2 md:p-5 rounded-xl  glass p-3 text-md text-white">
+                                    <div className="md:mt-14 mt-5 w-max ">
+                                        <p className="rounded-xl glass p-3 md:text-md text-sm text-white">
                                             You don't have any posts in "{themeFilter || 'All'}" yet!
                                         </p>
                                     </div>
